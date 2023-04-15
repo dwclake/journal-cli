@@ -4,6 +4,6 @@ project(pokedex)
 set(CMAKE_CXX_STANDARD 20)
 
 set(PROJECT_SOURCE_DIR src)
-set(SOURCE_FILES ${PROJECT_SOURCE_DIR})
+set(SOURCE_FILES ${PROJECT_SOURCE_DIR}/menu/menu.h ${PROJECT_SOURCE_DIR}/menu/src/menu.cpp)
 
 add_executable(pokedex ${PROJECT_SOURCE_DIR}/main.cpp ${SOURCE_FILES})
