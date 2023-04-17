@@ -21,7 +21,7 @@ int main() {
 
     Menu main_menu = MenuBuilder::create()
         ->title(" -- Main Menu --\n")
-        ->fn(fn)
+        ->fn("main", fn)
         ->build();
     
     while(!exit) main_menu();    

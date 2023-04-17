@@ -1,10 +1,11 @@
 #pragma once
 
-#include <vector>
 #include <functional>
 #include <string>
+#include <map>
 
 namespace menu {
+    using namespace std;
 
     struct MenuBuilder;
     struct Menu {
@@ -13,34 +14,34 @@ namespace menu {
 
         void operator() ();
 
-        std::string title() { return this->m_title; }
-        std::vector<Menu>* sub_menus() { return &this->m_sub_menus; }
-        Menu* get_sub(int idx) { return &this->m_sub_menus[idx]; }
-        std::function<void(Menu*)>* fn() { return &this->m_fn; }
+        string title() { return this->_title; }
+        map<string, Menu>* sub_menus() { return &this->_sub_menus; }
+        Menu* get_sub(string name) { return &this->_sub_menus[name]; }
+        function<void(Menu*)>* fn(string name) { return &this->_fns[name]; }
 
-        void for_each(std::function<void(Menu)> fn);
+        void for_each(function<void(Menu)> fn);
 
         private:
-        std::string m_title;
-        std::vector<Menu> m_sub_menus;
-        std::function<void(Menu*)> m_fn;
+        string _title;
+        map<string, Menu> _sub_menus;
+        map<string, function<void(Menu*)>> _fns;
     };
 
     struct MenuBuilder {
         static MenuBuilder* create() { return new MenuBuilder; }
-        MenuBuilder* title(std::string);
-        MenuBuilder* fn(std::function<void(Menu*)>);
-        MenuBuilder* sub_menu(Menu);
+        MenuBuilder* title(string);
+        MenuBuilder* fn(string, function<void(Menu*)>);
+        MenuBuilder* sub_menu(string, Menu);
         Menu build();
 
-        std::string get_title() { return this->m_title; }
-        std::vector<Menu>* get_sub_menus() { return &this->m_sub_menus; }
-        std::function<void(Menu*)>* get_fn() { return &this->m_fn; }
+        string get_title() { return this->_title; }
+        map<string, Menu>* get_sub_menus() { return &this->_sub_menus; }
+        map<string, function<void(Menu*)>>* get_fns() { return &this->_fns; }
 
         private:
-        std::string m_title{""};
-        std::vector<Menu> m_sub_menus;
-        std::function<void(Menu*)> m_fn{[](Menu*){}};
+        string _title{""};
+        map<std::string, Menu> _sub_menus;
+        map<std::string, std::function<void(Menu*)>> _fns;
     };
 
 }
