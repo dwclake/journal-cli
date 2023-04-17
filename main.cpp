@@ -1,5 +1,6 @@
 #include <cstdio>
 #include "includes/menu.h"
+#include "includes/clist.h"
 
 int main() {
     using namespace menu;
