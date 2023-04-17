@@ -23,7 +23,7 @@ int main() {
         ->title(" -- Main Menu --\n")
         ->fn(fn)
         ->build();
-
+    
     while(!exit) main_menu();    
 
     return 0;
