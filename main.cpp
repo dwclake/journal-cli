@@ -1,5 +1,5 @@
 #include <cstdio>
-#include "menu/menu.h"
+#include "includes/menu.h"
 
 int main() {
     using namespace menu;
