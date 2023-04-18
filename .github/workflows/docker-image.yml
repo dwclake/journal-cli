@@ -18,3 +18,12 @@ jobs:
       run: docker build . --file Dockerfile --tag diary-cli:$(date +%s)
     - name: Test the app inside the docker image
       run: echo "test"
+      
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Test the app inside the docker image
+      run: echo "test"
