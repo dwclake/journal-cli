@@ -29,4 +29,4 @@ COPY --chown=shs:shs --from=build \
     ./diary/build \
     ./app/
 
-ENTRYPOINT [ "./app/dairy-cli" ]
+ENTRYPOINT [ "./app/diary-cli" ]
