@@ -5,13 +5,13 @@ RUN apk update && \
     build-base=0.5-r3 \
     cmake
 
-WORKDIR /diary
+WORKDIR /journal
 
 COPY includes/ ./includes/
 COPY main.cpp .
 COPY CMakeLists.txt .
 
-WORKDIR /diary/build
+WORKDIR /journal/build
 
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
     cmake --build . --parallel 8
@@ -26,7 +26,7 @@ RUN addgroup -S shs && adduser -S shs -G shs
 USER shs
 
 COPY --chown=shs:shs --from=build \
-    ./diary/build/diary-cli \
-    ./app/diary-cli
+    ./journal/build/journal-cli \
+    ./app/journal-cli
 
-ENTRYPOINT [ "./app/diary-cli" ]
+ENTRYPOINT [ "./app/journal-cli" ]
