@@ -3,6 +3,17 @@
 #include "page.h"
 
 namespace journal {
+
+    enum Sort {
+        ALPHABETICAL,
+        CHRONILOGICAL,
+    };
+
+    enum SortDir {
+        ASCENDING,
+        DESCENDING,
+    };
+
     struct Journal {
         private: struct Node {
             journal::Page page;
