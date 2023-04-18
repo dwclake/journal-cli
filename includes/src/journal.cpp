@@ -1,4 +1,4 @@
-#include "../page.h"
+#include "../journal.h"
 
 namespace journal {
 

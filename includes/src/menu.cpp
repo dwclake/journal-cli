@@ -1,6 +1,6 @@
 #include "../menu.h"
 
-namespace menu {
+namespace app {
     using namespace std;
 
     void Menu::operator()() {

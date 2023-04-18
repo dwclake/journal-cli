@@ -1,28 +1,31 @@
 #include <cstdio>
 #include <random>
+#include "page.h"
 
-namespace clist {
-    template<typename T>
-    struct clist {
+namespace journal {
+    struct Journal {
         private: struct Node {
-            T data;
+            journal::Page page;
             Node* next{NULL};
             Node* prev{NULL};
 
             Node() {
-                T* temp = new T;
-                data = *temp;
+                journal::Page* temp = new journal::Page;
+                page = *temp;
                 delete temp;
             }
-            Node(T t): data(t) {}
+            Node(journal::Page p): page(p) {}
         };
+
+        Journal() {}
+        ~Journal() {}
 
         void display();
         void insert();
         void remove();
         void sort();
         bool check_date();
-        T* fetch();
+        journal::Page* fetch();
         unsigned size() {return this->_size;}
         Node* head() {return this->_head;}
         Node* tail() {return this->_tail;}
@@ -30,6 +33,6 @@ namespace clist {
     private: 
         Node* _head{NULL};
         Node* _tail{NULL};
-        unsigned _size;
+        unsigned _size{0};
     };
 }

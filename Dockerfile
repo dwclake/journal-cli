@@ -1,10 +1,10 @@
-FROM alpine:3.17.0 AS build
+FROM alpine:3.17.3 AS build
 
 RUN apk update && \
     apk add --no-cache \
     build-base=0.5-r3 \
-    cmake
-
+    cmake=3.24.4-r0
+    
 WORKDIR /journal
 
 COPY includes/ ./includes/
@@ -16,7 +16,7 @@ WORKDIR /journal/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
     cmake --build . --parallel 8
 
-FROM alpine:3.17.0 
+FROM alpine:3.17.3 
 
 RUN apk update && \
     apk add --no-cache \

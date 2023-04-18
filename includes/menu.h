@@ -4,7 +4,7 @@
 #include <string>
 #include <map>
 
-namespace menu {
+namespace app {
     using namespace std;
 
     struct MenuBuilder;
