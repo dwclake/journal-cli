@@ -7,9 +7,8 @@ RUN apk update && \
     
 WORKDIR /journal
 
-COPY src/includes ./src/includes/
-COPY main.cpp ./src
-COPY CMakeLists.txt ./src
+COPY src/ ./src/
+COPY CMakeLists.txt .
 
 WORKDIR /journal/build
 
