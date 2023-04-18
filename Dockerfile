@@ -3,7 +3,7 @@ FROM alpine:3.17.0 AS build
 RUN apk update && \
     apk add --no-cache \
     build-base=0.5-r3 \
-    cmake=3.24.3-r0
+    cmake=3.22
 
 WORKDIR /diary
 
