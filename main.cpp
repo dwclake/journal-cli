@@ -1,10 +1,9 @@
 #include <cstdio>
 #include "includes/menu.h"
 #include "includes/journal.h"
-#include "includes/page.h"
 
 int main() {
-    using namespace menu;
+    using namespace app;
 
     bool exit = false;
     auto main_display = [&](Menu* menu){

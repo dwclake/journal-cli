@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 
-namespace page {
+namespace journal {
     using namespace std;
 
     enum Month {
@@ -36,7 +36,7 @@ namespace page {
         unsigned year;
     };
 
-    struct page {
+    struct Page {
         string title;
         string body;
         Date date;
