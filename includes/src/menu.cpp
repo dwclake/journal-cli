@@ -38,8 +38,8 @@ namespace menu {
     }
 
     Menu::Menu(MenuBuilder* builder) {
-        this->_title = builder->get_title();
-        this->_fns = *builder->get_fns();
-        this->_sub_menus = *builder->get_sub_menus();
+        this->_title = builder->title();
+        this->_fns = *builder->fns();
+        this->_sub_menus = *builder->sub_menus();
     }
 }

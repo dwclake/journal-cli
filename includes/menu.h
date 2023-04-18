@@ -16,7 +16,7 @@ namespace menu {
 
         string title() { return this->_title; }
         map<string, Menu>* sub_menus() { return &this->_sub_menus; }
-        Menu* get_sub(string name) { return &this->_sub_menus[name]; }
+        Menu* sub(string name) { return &this->_sub_menus[name]; }
         function<void(Menu*)>* fn(string name) { return &this->_fns[name]; }
 
         void for_each(function<void(Menu)> fn);
@@ -34,9 +34,9 @@ namespace menu {
         MenuBuilder* sub_menu(string, Menu);
         Menu build();
 
-        string get_title() { return this->_title; }
-        map<string, Menu>* get_sub_menus() { return &this->_sub_menus; }
-        map<string, function<void(Menu*)>>* get_fns() { return &this->_fns; }
+        string title() { return this->_title; }
+        map<string, Menu>* sub_menus() { return &this->_sub_menus; }
+        map<string, function<void(Menu*)>>* fns() { return &this->_fns; }
 
         private:
         string _title{""};
