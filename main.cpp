@@ -1,6 +1,6 @@
 #include <cstdio>
 #include "includes/menu.h"
-#include "includes/clist.h"
+#include "includes/journal.h"
 #include "includes/page.h"
 
 int main() {

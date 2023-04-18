@@ -3,7 +3,7 @@
 
 namespace clist {
     template<typename T>
-    struct clist {
+    struct Journal {
         private: struct Node {
             T data;
             Node* next{NULL};
@@ -16,6 +16,9 @@ namespace clist {
             }
             Node(T t): data(t) {}
         };
+
+        Journal() {}
+        ~Journal() {}
 
         void display();
         void insert();
