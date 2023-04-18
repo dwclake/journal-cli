@@ -26,7 +26,7 @@ RUN addgroup -S shs && adduser -S shs -G shs
 USER shs
 
 COPY --chown=shs:shs --from=build \
-    ./diary/build \
-    ./app/
+    ./diary/build/diary-cli \
+    ./app/diary-cli
 
 ENTRYPOINT [ "./app/diary-cli" ]
