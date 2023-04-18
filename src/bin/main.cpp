@@ -1,6 +1,6 @@
 #include <cstdio>
-#include "includes/menu.h"
-#include "includes/journal.h"
+#include "../includes/menu.h"
+#include "../includes/journal.h"
 
 int main() {
     using namespace app;

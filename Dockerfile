@@ -7,14 +7,15 @@ RUN apk update && \
     
 WORKDIR /journal
 
-COPY includes/ ./includes/
-COPY main.cpp .
+COPY src/ ./src/
 COPY CMakeLists.txt .
 
 WORKDIR /journal/build
 
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
-    cmake --build . --parallel 8
+    cmake --build . --parallel 8 && \
+    mkdir ../bin && \
+    mv journal-cli ../bin/journal-cli
 
 FROM alpine:3.17.3 
 
@@ -26,7 +27,7 @@ RUN addgroup -S shs && adduser -S shs -G shs
 USER shs
 
 COPY --chown=shs:shs --from=build \
-    ./journal/build/journal-cli \
+    ./journal/bin/journal-cli \
     ./app/journal-cli
 
 ENTRYPOINT [ "./app/journal-cli" ]
