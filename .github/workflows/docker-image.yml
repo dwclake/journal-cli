@@ -1,4 +1,4 @@
-name: build
+name: docker
 
 on:
   push:
@@ -22,15 +22,16 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
     - name: Build docker images
-      run: docker build -t local -f Dockerfile .
-    - name: Run tests
-      run: docker run local
+      run: docker build -t journal-cli:$(date +%s) -f Dockerfile .
       
-  #test:
-   # needs: build
-    #runs-on: ubuntu-latest
+  test:
+    needs: build
+    runs-on: ubuntu-latest
 
-    #steps:
-    #- uses: ./
-    #- name: Test the app inside the docker image
-    #  run: docker run journal-cli
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+    - name: Build docker images
+      run: docker build -t journal-cli:$(date +%s) -f Dockerfile .
+    - name: Run image
+      run: docker run journal-cli
