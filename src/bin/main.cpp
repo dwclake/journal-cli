@@ -4,11 +4,14 @@
 
 int main() {
     using namespace app;
+    using namespace journal;
     
-    journal::Journal journal;
+    Journal journal;
 
-    journal::Page page;
-    page.title = "Hello world";
+    Page page = Page::builder()
+        ->title("Hello world")
+        ->body("Hows it going yall.\nIdk whats going on.")
+        ->build();
 
     journal.insert(page);
 
@@ -22,8 +25,6 @@ int main() {
                 std::printf("%s", sub.title().c_str());
         });
 
-        journal.display();
-
         exit = true;
     };
 
@@ -33,6 +34,8 @@ int main() {
         ->build();
     
     while(!exit) main_menu();    
+
+    journal.display();
 
     return 0;
 }

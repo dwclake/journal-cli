@@ -32,7 +32,7 @@ namespace journal {
         Node* current = this->_head;
 
         do {
-            printf("%s\n", current->page.title.c_str());
+            current->page.display();
             current = current->next;
 
         } while(current != this->_head);
