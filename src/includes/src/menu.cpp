@@ -43,7 +43,7 @@ namespace app {
 
     Menu::Menu(MenuBuilder* builder) {
         this->_title = builder->title();
-        this->_fns = *builder->fns();
-        this->_sub_menus = *builder->sub_menus();
+        this->_fns = std::move(*builder->fns());
+        this->_sub_menus = std::move(*builder->sub_menus());
     }
 }
