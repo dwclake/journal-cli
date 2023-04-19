@@ -16,12 +16,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag journal-cli
+      run: docker build . --file Dockerfile --tag journal-cli:(date +%s)
       
   test:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+    - uses: ./
     - name: Test the app inside the docker image
       run: docker run journal-cli
