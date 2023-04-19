@@ -16,27 +16,27 @@ namespace journal {
 
     struct Journal {
         private: struct Node {
-            journal::Page page;
+            Page page;
             Node* next{NULL};
             Node* prev{NULL};
 
             Node() {
-                journal::Page* temp = new journal::Page;
+                Page* temp = new Page;
                 page = *temp;
                 delete temp;
             }
-            Node(journal::Page p): page(p) {}
+            Node(Page p): page(p) {}
         };
 
         Journal() {}
         ~Journal() {}
 
         void display();
-        void insert();
+        void insert(Page page);
         void remove();
         void sort();
         bool check_date();
-        journal::Page* fetch();
+        Page* fetch();
         unsigned size() {return this->_size;}
         Node* head() {return this->_head;}
         Node* tail() {return this->_tail;}
