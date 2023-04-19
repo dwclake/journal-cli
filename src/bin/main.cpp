@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
     using namespace app;
     using namespace journal;
     
-    if(strcmp(argv[0],  "--test")) {
+    if(strcmp(argv[0], "--test")) {
         printf("Testing...\n");
         int test_result = Test::test();
 
