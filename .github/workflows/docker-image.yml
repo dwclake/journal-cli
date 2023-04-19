@@ -16,9 +16,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag test/journal-cli:$(date +%s) -o journal-cli
-    - name: Run the Docker image
-      run: docker run -v $PWD:/srv -w/srv journal-cli
+      run: docker build . --file Dockerfile --tag test/journal-cli:$(date +%s)
       
   #test:
    # needs: build
