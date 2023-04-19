@@ -18,7 +18,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag journal-cli:$(date +%s)
     - name: Run the Docker image
-      run: docker run -it -v $PWD:/srv -w/srv local make test
+      run: docker run -v $PWD:/srv -w/srv local make test
       
   #test:
    # needs: build
