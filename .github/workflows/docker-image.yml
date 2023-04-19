@@ -27,4 +27,4 @@ jobs:
     - name: Build docker images
       run: docker build -t journal-cli -f Dockerfile .
     - name: Run image
-      run: docker run journal-cli
+      run: docker run journal-cli --test
