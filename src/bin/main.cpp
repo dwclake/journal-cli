@@ -13,7 +13,7 @@ int main() {
 
         menu->for_each([](Menu sub){
                 std::printf("%s", sub.title().c_str());
-                });
+        });
 
         exit = true;
     };
