@@ -9,14 +9,7 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
-    #steps:
-    #- name: Checkout
-    #  uses: actions/checkout@v3
-    #- name: Build the Docker image
-    #  run: docker build . --file Dockerfile --tag test/journal-cli:$(date +%s)
     
     steps:
     - name: Check out code
@@ -32,6 +25,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
     - name: Build docker images
-      run: docker build -t journal-cli:$(date +%s) -f Dockerfile .
+      run: docker build -t journal-cli -f Dockerfile .
     - name: Run image
       run: docker run journal-cli
