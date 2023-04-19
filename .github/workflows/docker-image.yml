@@ -16,7 +16,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag journal-cli:$(date +%s)
+      run: docker build . --file Dockerfile --tag journal-cli:$(date)
       
   test:
     needs: build
@@ -24,5 +24,4 @@ jobs:
 
     steps:
     - name: Test the app inside the docker image
-      run: echo "test"
-           docker run journal-cli:$(date +%s)
+      run: docker run journal-cli:$(date)
