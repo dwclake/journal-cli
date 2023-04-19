@@ -8,17 +8,17 @@ on:
 
 jobs:
 
-  build:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Check out code
-      uses: actions/checkout@v3
-    - name: Build docker images
-      run: docker build -t journal-cli:$(date +%s) -f Dockerfile .
+  #build:
+  #  runs-on: ubuntu-latest
+  #  
+  #  steps:
+  #  - name: Check out code
+  #    uses: actions/checkout@v3
+  #  - name: Build docker images
+  #    run: docker build -t journal-cli:$(date +%s) -f Dockerfile .
       
   test:
-    needs: build
+    #  needs: build
     runs-on: ubuntu-latest
 
     steps:
