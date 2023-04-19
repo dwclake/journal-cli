@@ -24,7 +24,7 @@ jobs:
     - name: Build docker images
       run: docker build -t local -f Dockerfile .
     - name: Run tests
-      run: docker run -v $PWD:/srv -w/srv local make test
+      run: docker run -v $PWD:/srv -w/srv local
       
   #test:
    # needs: build
