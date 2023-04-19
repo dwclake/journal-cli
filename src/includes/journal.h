@@ -27,7 +27,7 @@ namespace journal {
             }
             Node(Page p): page(p) {}
         };
-
+    public:
         Journal() {}
         ~Journal() {}
 

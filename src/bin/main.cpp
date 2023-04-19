@@ -4,6 +4,13 @@
 
 int main() {
     using namespace app;
+    
+    journal::Journal journal;
+
+    journal::Page page;
+    page.title = "Hello world";
+
+    journal.insert(page);
 
     bool exit = false;
     auto main_display = [&](Menu* menu){
@@ -14,6 +21,8 @@ int main() {
         menu->for_each([](Menu sub){
                 std::printf("%s", sub.title().c_str());
         });
+
+        journal.display();
 
         exit = true;
     };

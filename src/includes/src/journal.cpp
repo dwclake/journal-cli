@@ -24,4 +24,18 @@ namespace journal {
         this->_tail = temp;
         this->_size++;
     }
+
+    void Journal::display() {
+        if(this->_size == 0) {
+            printf("Nothing to display, no pages in journal.\n");
+        }
+        Node* current = this->_head;
+
+        do {
+            printf("%s\n", current->page.title.c_str());
+            current = current->next;
+
+        } while(current != this->_head);
+    }
 }
+
