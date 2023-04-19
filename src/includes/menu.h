@@ -8,12 +8,14 @@ namespace app {
     using namespace std;
 
     struct MenuBuilder;
+
     struct Menu {
         Menu() {}
         Menu(MenuBuilder*);
 
         void operator() ();
 
+        static MenuBuilder* builder();
         string title() { return this->_title; }
         map<string, Menu>* sub_menus() { return &this->_sub_menus; }
         Menu* sub(string name) { return &this->_sub_menus[name]; }
@@ -28,7 +30,6 @@ namespace app {
     };
 
     struct MenuBuilder {
-        static MenuBuilder* create() { return new MenuBuilder; }
         MenuBuilder* title(string);
         MenuBuilder* fn(string, function<void(Menu*)>);
         MenuBuilder* sub_menu(string, Menu);
@@ -43,5 +44,4 @@ namespace app {
         map<std::string, Menu> _sub_menus;
         map<std::string, std::function<void(Menu*)>> _fns;
     };
-
 }

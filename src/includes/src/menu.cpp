@@ -6,6 +6,10 @@ namespace app {
     void Menu::operator()() {
         this->_fns["main"](this);
     }     
+    
+    MenuBuilder* Menu::builder() {
+        return new MenuBuilder;
+    }
 
     void Menu::for_each(function<void(Menu)> fn) {
         map<string, Menu>::iterator it;

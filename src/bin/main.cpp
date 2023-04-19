@@ -18,7 +18,7 @@ int main() {
         exit = true;
     };
 
-    Menu main_menu = MenuBuilder::create()
+    Menu main_menu = Menu::builder()
         ->title(" -- Main Menu --\n")
         ->fn("main", main_display)
         ->build();
