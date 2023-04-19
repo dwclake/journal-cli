@@ -83,8 +83,8 @@ namespace journal {
         vector<string>* tags() { return &this->_tags; }
 
     private:
-        string _title;
-        string _body;
+        string _title{""};
+        string _body{""};
         Date _date;
         vector<string> _tags;
     };

@@ -40,9 +40,7 @@ namespace journal {
     }
 
     void Page::display() {
-        printf("%s\n", this->title().c_str());
+        printf("\t%s\n", this->title().c_str());
         printf("%s\n", this->body().c_str());
     }
-
-
 }

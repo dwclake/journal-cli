@@ -10,10 +10,19 @@ int main() {
 
     Page page = Page::builder()
         ->title("Hello world")
-        ->body("Hows it going yall.\nIdk whats going on.")
+        ->body("Hows it going yall.\nIdk whats going on.\n")
+        ->build();
+    Page page2 = Page::builder()
+        ->title("Dobar dan")
+        ->body("Prijatelji\n")
+        ->build();
+    Page page3 = Page::builder()
+        ->title("Miredita")
         ->build();
 
     journal.insert(page);
+    journal.insert(page2);
+    journal.insert(page3);
 
     bool exit = false;
     auto main_display = [&](Menu* menu){
