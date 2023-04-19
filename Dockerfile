@@ -1,3 +1,4 @@
+ARG test
 FROM alpine:3.17.3 AS build
 
 RUN apk update && \
