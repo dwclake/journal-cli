@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <tuple>
-#include <algorithm>
 #include "../includes/menu.h"
 #include "../includes/journal.h"
 

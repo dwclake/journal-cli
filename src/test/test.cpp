@@ -15,22 +15,18 @@ namespace Test {
     }
 
     tuple<int, string> test_journal_insert() {
-        tuple<int, string> result(0, "Journal Insert test passed");
-        return result;
+        return {0, "Journal Insert test passed"};
     }
 
     tuple<int, string> test_journal_fetch() {
-        tuple<int, string> result(0, "Journal fetch test passed");
-        return result;
+        return {0, "Journal fetch test passed"};
     }
 
     tuple<int, string> test_journal_remove() {
-        tuple<int, string> result(0, "Journal remove test passed");
-        return result;
+        return {0, "Journal remove test passed"};
     }
 
     tuple<int, string> test_journal_sort() {
-        tuple<int, string> result(0, "Journal sort test passed");
-        return result;
+        return {0, "Journal sort test passed"};
     }
 }
