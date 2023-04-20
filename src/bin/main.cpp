@@ -7,13 +7,23 @@
 int main(int argc, char* argv[]) {
     using namespace app;
     using namespace journal;
-    
+    using namespace std;
+   
+    // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
         printf("Testing...\n");
-        int test_result = Test::test();
+        auto test_result = Test::test(); // Runs tests and returns a vector<tuple<int, string>>
+                                         // each element corresponds to a the result
+                                         // of a single test
 
-        printf("Test returned %d\n", test_result);
-        return test_result;
+        for(tuple<int, string> test: *test_result) { // Prints out the results of each test
+            int value; string message;
+            tie(value, message) = test;
+
+            printf("%s, test returned %d\n", message.c_str(), value);
+        }
+
+        return get<0>((*test_result)[0]); // Currently returns main with the first test value
     }
 
     Journal journal;
@@ -22,17 +32,8 @@ int main(int argc, char* argv[]) {
         ->title("Hello world")
         ->body("Hows it going yall.\nIdk whats going on.\n")
         ->build();
-    Page page2 = Page::builder()
-        ->title("Dobar dan")
-        ->body("Prijatelji\n")
-        ->build();
-    Page page3 = Page::builder()
-        ->title("Miredita")
-        ->build();
 
     journal.insert(page);
-    journal.insert(page2);
-    journal.insert(page3);
 
     bool exit = false;
     auto main_display = [&](Menu* menu){
