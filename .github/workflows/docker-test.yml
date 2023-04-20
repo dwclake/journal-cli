@@ -18,9 +18,9 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
     - name: Build docker images
-      run: DATE=$(date +%s) && docker build -t journal-cli:$DATE -f Dockerfile .
+      run: DATE=$(date +%s) && docker build -t journal-cli:$(DATE) -f Dockerfile .
     - name: Test image
-      run: docker run journal-cli:$DATE --test
+      run: docker run journal-cli:$(DATE) --test
     #- name: Run image
     #  run: docker run journal-cli
     #- name: Stop process
