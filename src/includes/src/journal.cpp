@@ -25,6 +25,28 @@ namespace journal {
         this->_size++;
     }
 
+    Page* Journal::fetch(string title) {
+        if(this->_size == 0) return NULL;
+
+        Node* current = this->_head;
+        do {
+            if(current->page.title() == title) {
+                return &current->page;
+            }
+            current = current->next;
+        } while(current != this->_head);
+
+        return NULL;
+    }
+
+    void Journal::remove(string title) {
+        
+    }
+
+    void Journal::sort(Sort type, SortDir dir) {
+
+    }
+
     void Journal::display() {
         if(this->_size == 0) {
             printf("Nothing to display, no pages in journal.\n");

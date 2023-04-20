@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstdio>
 #include <random>
 #include "page.h"
@@ -33,10 +35,9 @@ namespace journal {
 
         void display();
         void insert(Page page);
-        void remove();
-        void sort();
-        bool check_date();
-        Page* fetch();
+        void remove(string title);
+        void sort(Sort type, SortDir dir);
+        Page* fetch(string title);
         unsigned size() {return this->_size;}
         Node* head() {return this->_head;}
         Node* tail() {return this->_tail;}
