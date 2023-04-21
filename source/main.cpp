@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 
             result = result | value; // Bitwise or the result and the value of the current test
             // Prints out current tests message and value
-            printf("%s, test returned %d\n", message.c_str(), value);
+            printf("%s returned %d\n", message.c_str(), value);
         }
         return result; // Returns 1 if any test has failed
     }
