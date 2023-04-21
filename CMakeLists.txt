@@ -3,11 +3,19 @@ project(journal-cli)
 
 set(CMAKE_CXX_STANDARD 20)
 
-set(SOURCE_DIR src/includes)
-set(TEST_DIR src/test)
-set(SOURCE_FILES ${SOURCE_DIR}/menu.h ${SOURCE_DIR}/src/menu.cpp 
-                 ${SOURCE_DIR}/journal.h ${SOURCE_DIR}/src/journal.cpp
-                 ${SOURCE_DIR}/page.h ${SOURCE_DIR}/src/page.cpp)
-set(TEST_FILES ${TEST_DIR}/test.h ${TEST_DIR}/test.cpp)
+set(INCLUDE_DIR include)
+set(SOURCE_DIR source)
+set(TEST_DIR test)
 
-add_executable(journal-cli src/bin/main.cpp ${SOURCE_FILES} ${TEST_FILES})
+set(INCLUDE_FILES ${INCLUDE_DIR}/menu/menu.h
+                  ${INCLUDE_DIR}/journal/journal.h
+                  ${INCLUDE_DIR}/journal/page.h)
+
+set(SOURCE_FILES  ${SOURCE_DIR}/menu/menu.cpp 
+                  ${SOURCE_DIR}/journal/journal.cpp
+                  ${SOURCE_DIR}/journal/page.cpp)
+
+set(TEST_FILES ${TEST_DIR}/test.h 
+               ${TEST_DIR}/test.cpp)
+
+add_executable(journal-cli ${SOURCE_DIR}/main.cpp ${INCLUDE_FILES} ${SOURCE_FILES} ${TEST_FILES})

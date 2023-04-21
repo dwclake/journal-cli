@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <string.h>
-#include "../includes/menu.h"
-#include "../includes/journal.h"
+#include "../include/menu/menu.h"
+#include "../include/journal/journal.h"
 #include "../test/test.h"
 
 int main(int argc, char* argv[]) {

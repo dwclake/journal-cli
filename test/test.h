@@ -2,8 +2,8 @@
 
 #include <vector>
 #include <tuple>
-#include "../includes/menu.h"
-#include "../includes/journal.h"
+#include "../include/menu/menu.h"
+#include "../include/journal/journal.h"
 
 namespace Test {
     using namespace std;
