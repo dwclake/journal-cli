@@ -1,4 +1,4 @@
-#include "../page.h"
+#include "../../includes/journal/page.h"
 
 namespace journal {
     PageBuilder* Page::builder() {
