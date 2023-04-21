@@ -1,4 +1,4 @@
-#include "../../includes/journal/journal.h"
+#include "../../include/journal/journal.h"
 
 namespace journal {
     void Journal::insert(Page page) {
