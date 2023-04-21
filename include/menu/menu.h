@@ -32,7 +32,7 @@ namespace app {
     struct MenuBuilder {
         MenuBuilder* title(string);
         MenuBuilder* fn(string, function<void(Menu*)>);
-        MenuBuilder* sub_menu(string, Menu);
+        MenuBuilder* sub_menu(string, Menu&);
         Menu build();
 
         string title() { return this->_title; }

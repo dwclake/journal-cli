@@ -1,8 +1,15 @@
 #include "../../include/journal/page.h"
+#include <random>
 
 namespace journal {
     PageBuilder* Page::builder() {
-        return new PageBuilder;
+        PageBuilder* page = new PageBuilder;
+        
+        default_random_engine generator;
+        uniform_int_distribution<unsigned> distribution;
+
+        page->set_key(distribution(generator));
+        return page;
     }
 
     PageBuilder* PageBuilder::title(string title) {
@@ -15,7 +22,7 @@ namespace journal {
         return this;
     }
 
-    PageBuilder* PageBuilder::date(Date date) {
+    PageBuilder* PageBuilder::date(Date &date) {
         this->_date = std::move(date);
         return this;
     }
@@ -33,6 +40,7 @@ namespace journal {
     }
 
     Page::Page(PageBuilder* builder) {
+        this->_key = builder->key();
         this->_title = builder->title();
         this->_body = builder->body();
         this->_date = builder->date();

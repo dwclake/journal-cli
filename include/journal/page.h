@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <random>
 
 namespace journal {
     using namespace std;
@@ -58,6 +59,7 @@ namespace journal {
         Page(PageBuilder*);
 
         void display();
+        unsigned key() { return this->_key; }
         string title() { return this->_title; }
         string body() { return this->_body; }
         Date date() { return this->_date; }
@@ -66,6 +68,7 @@ namespace journal {
         static PageBuilder* builder();
 
     private:
+        unsigned _key;
         string _title;
         string _body;
         Date _date;
@@ -75,16 +78,19 @@ namespace journal {
     struct PageBuilder {
         PageBuilder* title(string);
         PageBuilder* body(string);
-        PageBuilder* date(Date);
+        PageBuilder* date(Date&);
         PageBuilder* tag(string);
         Page build();
 
+        unsigned key() { return this->_key; }
+        void set_key(unsigned key) { this->_key = key; }
         string title() { return this->_title; }
         string body() { return this->_body; }
         Date date() { return this->_date; }
         vector<string>* tags() { return &this->_tags; }
 
     private:
+        unsigned _key{0};
         string _title{""};
         string _body{""};
         Date _date;

@@ -25,12 +25,12 @@ namespace app {
     }
 
     MenuBuilder* MenuBuilder::fn(string name, function<void (Menu *)> fn) {
-        this->_fns.insert({name, std::move(fn)});
+        this->_fns.insert({std::move(name), std::move(fn)});
         return this;
     }
 
-    MenuBuilder* MenuBuilder::sub_menu(string name, Menu menu) {
-        this->_sub_menus.insert({name, std::move(menu)});
+    MenuBuilder* MenuBuilder::sub_menu(string name, Menu &menu) {
+        this->_sub_menus.insert({std::move(name), std::move(menu)});
         return this;
     }
 

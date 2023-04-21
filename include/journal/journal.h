@@ -35,9 +35,9 @@ namespace journal {
 
         void display();
         void insert(Page page);
-        void remove(string title);
+        void remove(unsigned key);
         void sort(Sort type, SortDir dir);
-        Page* fetch(string title);
+        Page* fetch(unsigned key);
         unsigned size() {return this->_size;}
         Node* head() {return this->_head;}
         Node* tail() {return this->_tail;}
