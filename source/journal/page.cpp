@@ -48,7 +48,46 @@ namespace journal {
     }
 
     void Page::display() {
-        printf("\t%s\n", this->title().c_str());
-        printf("%s\n", this->body().c_str());
+
+        string weekday;
+        switch(this->date().day().weekday) {
+            case MONDAY: weekday = "Mon"; break;
+            case TUESDAY: weekday = "Tue"; break;
+            case WEDNESDAY: weekday = "Wed"; break;
+            case THURSDAY: weekday = "Thu"; break;
+            case FRIDAY: weekday = "Fri"; break;
+            case SATURDAY: weekday = "Sat"; break;
+            case SUNDAY: weekday = "Sun"; break;
+        }
+
+        string month;
+        switch(this->date().month()) {
+            case JANUARY: month = "Jan"; break;
+            case FEBRUARY: month = "Feb"; break;
+            case MARCH: month = "Mar"; break;
+            case APRIL: month = "Apr"; break;
+            case MAY: month = "May"; break;
+            case JUNE: month = "Jun"; break;
+            case JULY: month = "Jul"; break;
+            case AUGUST: month = "Aug"; break;
+            case SEPTEMBER: month = "Sep"; break;
+            case OCTOBER: month = "Oct"; break;
+            case NOVEMBER: month = "Nov"; break;
+            case DECEMBER: month = "Dec"; break;
+        }
+
+        printf("\t\t%s %s %d %d: ", 
+                weekday.c_str(), 
+                month.c_str(),
+                this->date().day().day,
+                this->date().year());
+        printf("%s\n\n", this->title().c_str());
+
+        printf("%s\n\n", this->body().c_str());
+        printf("tags: ");
+        for(string tag: *this->tags()) {
+            printf("[%s] ", tag.c_str());
+        }
+        printf("\n");
     }
 }

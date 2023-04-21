@@ -42,7 +42,7 @@ namespace journal {
 
     struct Date {
         Month month() { return this->_month; }  
-        Day weekday() { return this->_day; }
+        Day day() { return this->_day; }
         unsigned year() { return this->_year; }
         
         Date() {}
