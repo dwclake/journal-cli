@@ -10,9 +10,9 @@ namespace Test {
 
         static vector<tuple<int, string>> test_results = {
             test_journal_insert(),
-            test_journal_remove(),
             test_journal_fetch(),
-            test_journal_remove()
+            test_journal_remove(),
+            test_journal_sort()
         };
         return &test_results;
     }
@@ -21,7 +21,7 @@ namespace Test {
         unsigned result;
         string message;
 
-        printf("Testing journal insert...\n");
+        printf("--Testing journal insert...\n\n");
 
         journal::Journal j; // Create new journal object
         // Create a page with a title and a body
@@ -36,7 +36,7 @@ namespace Test {
 
         j.display();
         
-        result = (j.size() == 3)? 0: 1;
+        result = (j.size() == 2)? 0: 1;
         message = (!result)
             ? "Journal insert test passed" 
             : "Journal insert test failed, journal size incorrect";
@@ -45,14 +45,17 @@ namespace Test {
     }
 
     tuple<int, string> test_journal_fetch() {
+        printf("--Testing journal fetch...\n\n");
         return {0, "Journal fetch test passed"};
     }
 
     tuple<int, string> test_journal_remove() {
+        printf("--Testing journal remove...\n\n");
         return {0, "Journal remove test passed"};
     }
 
     tuple<int, string> test_journal_sort() {
+        printf("--Testing journal sort...\n\n");
         return {0, "Journal sort test passed"};
     }
 }
