@@ -18,15 +18,23 @@ namespace Test {
     }
 
     tuple<int, string> test_journal_insert() {
+        using namespace journal;
+        using enum Weekday;
+        using enum Month;
         unsigned result;
         string message;
 
         printf("--Testing journal insert--\n\n");
 
-        journal::Journal j; // Create new journal object
+        Journal j; // Create new journal object
         // Create a page with a title and a body
-        journal::Page p = journal::Page::builder()
+        Day day{MONDAY, 1};
+        Date date(JANUARY, day, 2000);
+        Page p = Page::builder()
             ->title("Dobar dan!")
+            ->body("    Lorem ipsum dolor sit amet, qui minim labore\nadipisicing minim sint cillum sint consectetur cupidatat.")
+            ->date(date)
+            ->tag("chill")
             ->build();
         unsigned k = p.key();
         // Insert page into the journal

@@ -87,7 +87,7 @@ namespace journal {
     }
 
     void Journal::display() {
-        printf("Journal entries:\n");
+        printf("Journal entries:\n\n");
         if(this->_size == 0) {
             printf("Nothing to display, no pages in journal.\n");
         }
