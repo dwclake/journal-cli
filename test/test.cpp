@@ -32,7 +32,7 @@ namespace Test {
         Date date(JANUARY, day, 2000);
         Page p = Page::builder()
             ->title("Dobar dan!")
-            ->body("    Lorem ipsum dolor sit amet, qui minim labore\nadipisicing minim sint cillum sint consectetur cupidatat.")
+            ->body("    Lorem ipsum dolor sit amet, qui minim labore\nadipisicing minim sint cillum sint consectetur\ncupidatat.")
             ->date(date)
             ->tag("chill")
             ->build();
