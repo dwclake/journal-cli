@@ -2,49 +2,51 @@
 
 #include <cstdio>
 #include <random>
+#include <functional>
 #include "page.h"
 
 namespace journal {
-
+    // Enum for sort type
     enum Sort {
         ALPHABETICAL,
         CHRONILOGICAL,
     };
-
+    // Enum for sort direction
     enum SortDir {
         ASCENDING,
         DESCENDING,
     };
-
+    // Journal struct, a CDLL, each node containing a page
     struct Journal {
-        private: struct Node {
+        // private Node struct, containing prev and next pointers and a page
+    private: struct Node {
             Page page;
             Node* next{NULL};
             Node* prev{NULL};
 
-            Node() {
-                Page* temp = new Page;
-                page = *temp;
-                delete temp;
-            }
-            Node(Page p): page(p) {}
+            Node() {} // Default constructor
+            Node(Page p): page(p) {} // Constructor taking a page
         };
     public:
-        Journal() {}
-        ~Journal() {}
+        Journal() {} // Default constructor
+        Journal(string name): _name(name) {} // Constructor taking the name of journal
+        ~Journal() {} // Destructor
 
-        void display();
-        void insert(Page page);
-        void remove(unsigned key);
-        void sort(Sort type, SortDir dir);
-        Page* fetch(unsigned key);
-        unsigned size() {return this->_size;}
-        Node* head() {return this->_head;}
-        Node* tail() {return this->_tail;}
+        void display(); // Prints out every page in order
+        void insert(Page page); 
+        void remove(unsigned key); // Removes page with matching key
+        void sort(Sort type, SortDir dir); // Sorts based on enums from above
+        void sort(function<bool(Page*, Page*)> predicate); // Sorts based on supplied function
+        Page* fetch(unsigned key); // Finds page with matching key
+        string name() { return this->_name; }
+        unsigned size() { return this->_size; }
+        Node* head() { return this->_head; }
+        Node* tail() { return this->_tail; }
 
-    private: 
-        Node* _head{NULL};
-        Node* _tail{NULL};
+    private:
+        string _name{""};
+        Node* _head{NULL}; // First node in the list
+        Node* _tail{NULL}; // Last node in the list
         unsigned _size{0};
     };
 }

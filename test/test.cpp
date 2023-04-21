@@ -26,7 +26,7 @@ namespace Test {
 
         printf("--Testing journal insert--\n\n");
 
-        Journal j; // Create new journal object
+        Journal j{"test"}; // Create new journal object
         // Create a page with a title and a body
         Day day{MONDAY, 1};
         Date date(JANUARY, day, 2000);
@@ -35,20 +35,25 @@ namespace Test {
             ->body("    Lorem ipsum dolor sit amet, qui minim labore\nadipisicing minim sint cillum sint consectetur\ncupidatat.")
             ->date(date)
             ->tag("chill")
+            ->tag("sunny")
             ->build();
         unsigned k = p.key();
-        // Insert page into the journal
+        // Insert page into the journal three times
         j.insert(p);
         j.insert(p);
         j.insert(p);
 
+        // Display journal
         j.display();
         
+        // If journal size is 3, set result to 0, otherwise set it to 1
         result = (j.size() == 3)? 0: 1;
+        // Set message to passing message if result is zero, otherwise set it to
+        // failing message
         message = (!result)
             ? "\033[32mPassed\033[0m: Journal insert test:" 
             : "\033[31mError\033[0m: Journal insert test: journal size incorrect";
-        
+        // Return a tuple with the result value and message 
         return {result, message};
     }
 

@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     using namespace journal;
     using namespace std;
 
-/* Program testing */
+/* #### Program testing ############################################################## */
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
@@ -30,12 +30,11 @@ int main(int argc, char* argv[]) {
         return result; // Returns 1 if any test has failed
     }
 
-/* End of program testing */
+/* #### End of program testing ####################################################### */
+
 
     bool exit = false; // Bool to control main program loop
-                       
-    Journal journal; // Create new journal object
-
+    
     // Display lambda for main menu
     auto main_display = [&](Menu* menu){
         std::system("clear"); // Clear terminal

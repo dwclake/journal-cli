@@ -86,6 +86,10 @@ namespace journal {
 
     }
 
+    void Journal::sort(function<bool(Page*, Page*)> predicate) {
+
+    }
+
     void Journal::display() {
         printf("Journal entries:\n\n");
         if(this->_size == 0) {
