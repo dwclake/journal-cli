@@ -2,6 +2,7 @@
 #include <random>
 
 namespace journal {
+    // Static page function to start building new pages
     PageBuilder* Page::builder() {
         PageBuilder* page = new PageBuilder;
         
@@ -12,26 +13,31 @@ namespace journal {
         return page;
     }
 
+    // Adds a title to the page being built
     PageBuilder* PageBuilder::title(string title) {
         this->_title = std::move(title);
         return this;
     }
 
+    // Adds a body to the page being built
     PageBuilder* PageBuilder::body(string body) {
         this->_body = std::move(body);
         return this;
     }
 
+    // Adds a date to the page being built
     PageBuilder* PageBuilder::date(Date &date) {
         this->_date = std::move(date);
         return this;
     }
 
+    // Adds a tag to the page being built, can be called as many times as needed
     PageBuilder* PageBuilder::tag(string tag) {
         this->_tags.push_back(std::move(tag));
         return this;
     }
 
+    // Builds the page and returns it
     Page PageBuilder::build() {
         Page temp;
         temp = this;
@@ -39,6 +45,7 @@ namespace journal {
         return temp;
     }
 
+    // Page constructor taking PageBuilder*
     Page::Page(PageBuilder* builder) {
         this->_key = builder->key();
         this->_title = builder->title();
@@ -47,8 +54,9 @@ namespace journal {
         this->_tags = std::move(*builder->tags());
     }
 
+    // Page display function
     void Page::display() {
-
+        // Convert weekday to string
         string weekday;
         switch(this->date().day().weekday) {
             case MONDAY: weekday = "Mon"; break;
@@ -59,7 +67,7 @@ namespace journal {
             case SATURDAY: weekday = "Sat"; break;
             case SUNDAY: weekday = "Sun"; break;
         }
-
+        // Convert month to string
         string month;
         switch(this->date().month()) {
             case JANUARY: month = "Jan"; break;
@@ -75,15 +83,17 @@ namespace journal {
             case NOVEMBER: month = "Nov"; break;
             case DECEMBER: month = "Dec"; break;
         }
-
+        // Print date
         printf("\t\t%s %s %d %d: ", 
                 weekday.c_str(), 
                 month.c_str(),
                 this->date().day().day,
                 this->date().year());
+        // Print title
         printf("%s\n\n", this->title().c_str());
-
+        // Print body
         printf("%s\n\n", this->body().c_str());
+        // Print tags
         printf("tags: ");
         for(string tag: *this->tags()) {
             printf("[%s] ", tag.c_str());

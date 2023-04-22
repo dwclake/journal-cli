@@ -9,18 +9,19 @@ int main(int argc, char* argv[]) {
     using namespace journal;
     using namespace std;
 
-/* Program testing */
+/* ---- Program testing -------------------------------------------------------------- */
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
         auto test_result = Test::test(); // Runs tests and returns a vector<tuple<int, string>>
                                          // each element corresponds to a the result
                                          // of a single test
+
         int result{0}; // return value for main
         // Print out the results of each test
-        for(tuple<int, string> test: *test_result) {
+        for(auto test: *test_result) {
 
-            int value; string message;
+            int value; string message; // Variables to store tuple values
             tie(value, message) = test; // Destructure tuple into individual variables
 
             result = result | value; // Bitwise or the result and the value of the current test
@@ -30,24 +31,22 @@ int main(int argc, char* argv[]) {
         return result; // Returns 1 if any test has failed
     }
 
-/* End of program testing */
+/* ---- End of program testing --------------------------------------------------------- */
 
     bool exit = false; // Bool to control main program loop
-                       
-    Journal journal; // Create new journal object
-
+    
     // Display lambda for main menu
     auto main_display = [&](Menu* menu){
         std::system("clear"); // Clear terminal
 
         printf("%s", menu->title().c_str()); // Print main menu title
+
         // For each sub menu, print their title
         menu->for_each([](Menu sub){
                 std::printf("%s", sub.title().c_str());
         });
 
-        // Set exit to true to end main loop
-        exit = true;
+        exit = true; // Exit main loop
     };
 
     // Create new menu, main_menu, and give it a title and the display lambda with the key "main".
