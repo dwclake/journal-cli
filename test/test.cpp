@@ -19,8 +19,7 @@ namespace Test {
 
     tuple<int, string> test_journal_insert() {
         using namespace journal;
-        using enum Weekday;
-        using enum Month;
+
         unsigned result;
         string message;
 
@@ -28,8 +27,8 @@ namespace Test {
 
         Journal j{"test"}; // Create new journal object
         // Create a page with a title and a body
-        Day day{MONDAY, 1};
-        Date date(JANUARY, day, 2000);
+        Day day{Weekday::MONDAY, 1};
+        Date date(Month::JANUARY, day, 2000);
         Page p = Page::builder()
             ->title("Dobar dan!")
             ->body("    Lorem ipsum dolor sit amet, qui minim labore\nadipisicing minim sint cillum sint consectetur\ncupidatat.")
