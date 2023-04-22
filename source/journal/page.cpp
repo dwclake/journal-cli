@@ -1,5 +1,4 @@
 #include "../../include/journal/page.h"
-#include <random>
 
 namespace journal {
     // Static page function to start building new pages

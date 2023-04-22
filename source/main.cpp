@@ -1,5 +1,7 @@
 #include <sqlite3.h>
 
+#include <cstring>
+
 #include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"

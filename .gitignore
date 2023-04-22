@@ -4,3 +4,7 @@
 /.idea/
 /.DS_Store
 /.cache/
+/vcpkg/packages/
+/vcpkg/downloads/
+/vcpkg/buildtrees/
+
