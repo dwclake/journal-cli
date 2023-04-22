@@ -2,14 +2,14 @@
 
 #include <vector>
 #include <tuple>
-#include "../include/menu/menu.h"
+#include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 
 namespace Test {
     using namespace std;
 
     vector<function<string()>>* tests(); // Runs all tests and returns a vector of tuples containing the result of each test
-                                         //
+                                         
     // Tests journal insert function - !THROWS
     string test_journal_insert(); 
     // Tests journal edit function - !THROWS

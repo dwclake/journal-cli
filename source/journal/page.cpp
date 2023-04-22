@@ -5,8 +5,9 @@ namespace journal {
     // Static page function to start building new pages
     PageBuilder* Page::builder() {
         PageBuilder* page = new PageBuilder;
-        
-        default_random_engine generator;
+
+        random_device rd;
+        mt19937 generator(rd());
         uniform_int_distribution<unsigned> distribution;
 
         page->set_key(distribution(generator));
@@ -15,25 +16,25 @@ namespace journal {
 
     // Adds a title to the page being built
     PageBuilder* PageBuilder::title(string title) {
-        this->_title = std::move(title);
+        this->_title = title;
         return this;
     }
 
     // Adds a body to the page being built
     PageBuilder* PageBuilder::body(string body) {
-        this->_body = std::move(body);
+        this->_body = body;
         return this;
     }
 
     // Adds a date to the page being built
-    PageBuilder* PageBuilder::date(Date &date) {
-        this->_date = std::move(date);
+    PageBuilder* PageBuilder::date(Date date) {
+        this->_date = date;
         return this;
     }
 
     // Adds a tag to the page being built, can be called as many times as needed
     PageBuilder* PageBuilder::tag(string tag) {
-        this->_tags.push_back(std::move(tag));
+        this->_tags.push_back(tag);
         return this;
     }
 

@@ -39,7 +39,7 @@ namespace journal {
         Weekday weekday{Weekday::MONDAY}; // Default weekday is Monday
         unsigned day{1}; // Default day is 1
 
-        Day() {} // Default constructor
+        Day() = default; // Default constructor
         Day(Weekday w, unsigned d): weekday(w), day(d) {} // Constructor taking a weekday and a day
     };
 
@@ -49,7 +49,7 @@ namespace journal {
         Day day() { return this->_day; }
         unsigned year() { return this->_year; }
         
-        Date() {} // Default constructor
+        Date() = default; // Default constructor
         Date(Month m, Day d, unsigned y): _month(m), _day(d), _year(y) {} // Constructor taking a month, a day, and a year
     private:
         Month _month{Month::JANUARY}; // Default month is January
@@ -61,7 +61,7 @@ namespace journal {
     struct PageBuilder;
     // Structure containing a key, a title, a body, a date, and a vector of tags
     struct Page {
-        Page() {} // Default constructor
+        Page() = default; // Default constructor
         Page(PageBuilder*); // Constructor taking a PageBuilder*
 
         void display(); // Displays the page
@@ -74,7 +74,7 @@ namespace journal {
         static PageBuilder* builder(); // Returns a PageBuilder*, used to build a new page
 
     private:
-        unsigned _key;  // Key used to identify the page
+        unsigned _key{};  // Key used to identify the page
         string _title; // Title of the page
         string _body; // Body/Content of the page
         Date _date; // Date of the page
@@ -85,7 +85,7 @@ namespace journal {
     struct PageBuilder {
         PageBuilder* title(string); // Sets the title of the page
         PageBuilder* body(string); // Sets the body of the page
-        PageBuilder* date(Date&); // Sets the date of the page
+        PageBuilder* date(Date); // Sets the date of the page
         PageBuilder* tag(string); // Adds a tag to the page
         Page build(); // Builds the page and returns it
 

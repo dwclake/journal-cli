@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <string.h>
 #include <tuple>
-#include "../include/menu/menu.h"
+#include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"
 
@@ -14,9 +14,7 @@ int main(int argc, char* argv[]) {
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
-        auto tests = Test::tests(); // Runs tests and returns a vector<tuple<int, string>>
-                                         // each element corresponds to a the result
-                                         // of a single test
+        auto tests = Test::tests(); // Returns a vector of test function pointers
 
         int test_count = tests->size(); // Count of tests to be run
         int passed_count{0}; // Count of tests which passed
@@ -27,21 +25,22 @@ int main(int argc, char* argv[]) {
         int result{0}; // return value for main
         for(auto test: *tests) {
             try {
-                string message = test();
-                printf("%s, returned %d\n", message.c_str(), 0); // Print out pass message
+                string message = test(); // Run test and store message
+                printf("%s returned %d\n", message.c_str(), 0); // Print out pass message
 
                 passed_count++;
-            } catch (tuple<unsigned, string> e) {
+            } catch (tuple<unsigned, string> &e) {
                 int value; string message; // Variables to store tuple values
                 tie(value, message) = e; // Destructure tuple into individual variables
                                          
                 result = result | value; // Bitwise or the result and the value of the current test
 
-                printf("%s, returned %d\n", message.c_str(), value); // Print out fail message
+                printf("%s returned %d\n", message.c_str(), value); // Print out fail message
             }
         }
         printf("Tests complete: %d/%d Tests Passed\n", passed_count, test_count);
-        return result; // Returns 1 if any test has failed
+        return result; // Returns 0 if all tests passed, 
+                       // otherwise returns bitwise or of all test return values
     }
 
 /* ---- End of program testing --------------------------------------------------------- */
@@ -66,7 +65,7 @@ int main(int argc, char* argv[]) {
     // "main" function is automatically called when object is called as a function ie: main_menu();
     Menu main_menu = Menu::builder()
         ->title("\t\t\t -- Main Menu --\n")
-        ->fn("main", main_display)
+        ->fn("main", std::move(main_display))
         ->build(); 
     
     while(!exit) main_menu(); // Run main menu until exit is set true    

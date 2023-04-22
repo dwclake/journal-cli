@@ -1,4 +1,4 @@
-#include "../../include/menu/menu.h"
+#include "../../include/app/menu.h"
 
 namespace app {
     using namespace std;
@@ -23,19 +23,19 @@ namespace app {
 
     // Adds a title to the menu being built
     MenuBuilder* MenuBuilder::title(string title) {
-        this->_title = std::move(title);
+        this->_title = title;
         return this;
     }
 
     // Adds a function to the menu being built, can be called as many times as needed
     MenuBuilder* MenuBuilder::fn(string name, function<void (Menu *)> fn) {
-        this->_fns.insert({std::move(name), std::move(fn)});
+        this->_fns.insert({name, fn});
         return this;
     }
 
     // Adds a sub menu to the menu being built, can be called as many times as needed
     MenuBuilder* MenuBuilder::sub_menu(string name, Menu &menu) {
-        this->_sub_menus.insert({std::move(name), std::move(menu)});
+        this->_sub_menus.insert({name, menu});
         return this;
     }
 
