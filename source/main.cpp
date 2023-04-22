@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <string.h>
+#include <tuple>
 #include "../include/menu/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"
@@ -13,21 +14,33 @@ int main(int argc, char* argv[]) {
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
-        auto test_result = Test::test(); // Runs tests and returns a vector<tuple<int, string>>
+        auto tests = Test::tests(); // Runs tests and returns a vector<tuple<int, string>>
                                          // each element corresponds to a the result
                                          // of a single test
 
+        int test_count = tests->size(); // Count of tests to be run
+        int passed_count{0}; // Count of tests which passed
+    
+        system("clear");
+        printf("Running %d Tests:\n", test_count);
+
         int result{0}; // return value for main
-        // Print out the results of each test
-        for(auto test: *test_result) {
+        for(auto test: *tests) {
+            try {
+                string message = test();
+                printf("%s, returned %d\n", message.c_str(), 0); // Print out pass message
 
-            int value; string message; // Variables to store tuple values
-            tie(value, message) = test; // Destructure tuple into individual variables
+                passed_count++;
+            } catch (tuple<unsigned, string> e) {
+                int value; string message; // Variables to store tuple values
+                tie(value, message) = e; // Destructure tuple into individual variables
+                                         
+                result = result | value; // Bitwise or the result and the value of the current test
 
-            result = result | value; // Bitwise or the result and the value of the current test
-            // Prints out current tests message and value
-            printf("%s returned %d\n", message.c_str(), value);
+                printf("%s, returned %d\n", message.c_str(), value); // Print out fail message
+            }
         }
+        printf("Tests complete: %d/%d Tests Passed\n", passed_count, test_count);
         return result; // Returns 1 if any test has failed
     }
 
