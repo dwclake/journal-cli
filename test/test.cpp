@@ -6,7 +6,7 @@
 namespace Test {
     using namespace std;
 
-    /* ---- Test functions wrapper which returns a vector of pointer for tests to run in main ------------------ */
+    /* ---- Test functions wrapper which returns a vector of pointers to tests which will be run in main ------- */
     vector<function<string()>>* tests() {
 
         static vector<function<string()>> tests = {
@@ -25,13 +25,13 @@ namespace Test {
     string test_journal_insert() {
         using namespace journal;
 
-        unsigned result; // Return value to throw to main if their is an error
-
         printf("--Testing journal insert\n");
+
+        unsigned result; // Return value to throw to main if their is an error
 
         Journal j{"test"}; // Create new journal object
 
-        // Create a page with a title and a body
+        // Create a page with a title, body, date, and two tags
         Day day{Weekday::MONDAY, 1};
         Date date(Month::JANUARY, day, 2000);
         Page p = Page::builder()
@@ -47,8 +47,8 @@ namespace Test {
         j.insert(p);
         j.insert(p);
 
-        // If journal size is 3, set result to 0, otherwise set it to 1
-        result = (j.size() == 3)? 0: 1;
+        result = (j.size() == 3)? 0: 1; // If journal size is 3, set result to 0, 
+                                        // otherwise set it to 1
 
         // If result is 1, throw tuple with error value and message
         if(result == 1) {
