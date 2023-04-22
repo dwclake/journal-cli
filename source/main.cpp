@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
-        auto tests = Test::tests(); // Returns a vector of tedt function pointers
+        auto tests = Test::tests(); // Returns a vector of test function pointers
 
         int test_count = tests->size(); // Count of tests to be run
         int passed_count{0}; // Count of tests which passed
