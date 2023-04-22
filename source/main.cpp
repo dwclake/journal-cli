@@ -14,9 +14,7 @@ int main(int argc, char* argv[]) {
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
-        auto tests = Test::tests(); // Runs tests and returns a vector<tuple<int, string>>
-                                         // each element corresponds to a the result
-                                         // of a single test
+        auto tests = Test::tests(); // Returns a vector of tedt function pointers
 
         int test_count = tests->size(); // Count of tests to be run
         int passed_count{0}; // Count of tests which passed
@@ -41,7 +39,7 @@ int main(int argc, char* argv[]) {
             }
         }
         printf("Tests complete: %d/%d Tests Passed\n", passed_count, test_count);
-        return result; // Returns 1 if any test has failed
+        return result; // Returns 0 if all tests passed, otherwise returns bitwise or of all test return values
     }
 
 /* ---- End of program testing --------------------------------------------------------- */
