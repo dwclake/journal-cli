@@ -9,7 +9,7 @@ namespace Test {
     using namespace std;
 
     vector<function<string()>>* tests(); // Runs all tests and returns a vector of tuples containing the result of each test
-                                         //
+                                         
     // Tests journal insert function - !THROWS
     string test_journal_insert(); 
     // Tests journal edit function - !THROWS

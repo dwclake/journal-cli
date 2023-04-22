@@ -56,8 +56,8 @@ namespace journal {
         Node* current = this->_head;
         // If journal contains 1 element which matches the key, set head/tail to NULL and delete current
         if(this->size() == 1 && current->page.key() == key) {
-            this->_head = NULL;
-            this->_tail = NULL;
+            this->_head = nullptr;
+            this->_tail = nullptr;
             this->_size = 0;
 
             delete current;
@@ -81,14 +81,16 @@ namespace journal {
             this->_tail = current->prev;
         }
 
-        // Connect nodes before and after current to eachother
+        // Connect nodes before and after current to each other
         current->next->prev = current->prev;
         current->prev->next = current->next;
-        // Set current nodes 
-        current->next = NULL;
-        current->prev = NULL;
         // Decrement size and delete current
         this->_size--;
+
+        // Create circular links
+        this->_head->prev = this->_tail;
+        this->_tail->next = this->_head;
+
         delete current;
     }
 
