@@ -32,8 +32,8 @@ namespace journal {
     }
 
     // Journal fetch function
-    Page* Journal::fetch(unsigned key) {
-        if(this->_size == 0) return NULL;
+    optional<Page*> Journal::fetch(unsigned key) {
+        if(this->_size == 0) return nullopt;
 
         // If journal is not empty, iterate through list until key is found
         Node* current = this->_head;
@@ -46,7 +46,7 @@ namespace journal {
         } while(current != this->_head);
 
         // If key is not found, return NULL
-        return NULL;
+        return nullopt;
     }
 
     // Journal remove function
