@@ -21,7 +21,7 @@ namespace Test {
 
     /* ---- Program tests -------------------------------------------------------------------------------------- */
 
-    // Tests journal insert function
+    // Tests journal insert function - !THROWS
     string test_journal_insert() {
         using namespace journal;
 
@@ -59,25 +59,25 @@ namespace Test {
         return "\033[32mPassed\033[0m: Journal insert test:"; // Return passing message
     }
 
-    // Tests journal edit function
+    // Tests journal edit function - !THROWS
     string test_journal_edit() {
         printf("--Testing journal edit\n");
         return {"\033[32mPassed:\033[0m Journal edit test:"};
     }
 
-    // Tests journal fetch function
+    // Tests journal fetch function - !THROWS
     string test_journal_fetch() {
         printf("--Testing journal fetch\n");
         return {"\033[32mPassed:\033[0m Journal fetch test:"};
     }
 
-    // Tests journal remove function
+    // Tests journal remove function - !THROWS
     string test_journal_remove() {
         printf("--Testing journal remove\n");
         return {"\033[32mPassed:\033[0m Journal remove test:"};
     }
 
-    // Tests journal sort function
+    // Tests journal sort function - !THROWS
     string test_journal_sort() {
         printf("--Testing journal sort\n");
         return {"\033[32mPassed:\033[0m Journal sort test:"};
