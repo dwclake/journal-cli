@@ -1,9 +1,7 @@
-#include <cstdio>
-#include <string.h>
-#include <tuple>
 #include "../include/menu/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"
+#include <sqlite3.h>
 
 int main(int argc, char* argv[]) {
     using namespace app;
@@ -11,19 +9,21 @@ int main(int argc, char* argv[]) {
     using namespace std;
 
 /* ---- Program testing -------------------------------------------------------------- */
+    
+    printf("Sqlite3 Version: %s\n", sqlite3_libversion()); // Print sqlite3 version
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
         auto tests = Test::tests(); // Returns a vector of test function pointers
 
-        int test_count = tests->size(); // Count of tests to be run
-        int passed_count{0}; // Count of tests which passed
+        unsigned test_count = tests->size(); // Count of tests to be run
+        unsigned passed_count{0}; // Count of tests which passed
     
         system("clear");
         printf("Running %d Tests:\n", test_count);
 
         int result{0}; // return value for main
-        for(auto test: *tests) {
+        for(auto &test: *tests) {
             try {
                 string message = test(); // Run test and store message
                 printf("%s returned %d\n", message.c_str(), 0); // Print out pass message
