@@ -7,13 +7,15 @@ set(INCLUDE_DIR include)
 set(SOURCE_DIR source)
 set(TEST_DIR test)
 
-set(INCLUDE_FILES ${INCLUDE_DIR}/menu/menu.h
+set(INCLUDE_FILES ${INCLUDE_DIR}/app/menu.h
                   ${INCLUDE_DIR}/journal/journal.h
-                  ${INCLUDE_DIR}/journal/page.h)
+                  ${INCLUDE_DIR}/journal/page.h
+                  ${INCLUDE_DIR}/utility/utility.h)
 
-set(SOURCE_FILES  ${SOURCE_DIR}/menu/menu.cpp 
+set(SOURCE_FILES  ${SOURCE_DIR}/app/menu.cpp 
                   ${SOURCE_DIR}/journal/journal.cpp
-                  ${SOURCE_DIR}/journal/page.cpp)
+                  ${SOURCE_DIR}/journal/page.cpp
+                  ${SOURCE_DIR}/utility/utility.cpp)
 
 set(TEST_FILES ${TEST_DIR}/test.h 
                ${TEST_DIR}/test.cpp)

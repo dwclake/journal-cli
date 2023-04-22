@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <string.h>
 #include <tuple>
-#include "../include/menu/menu.h"
+#include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"
 
