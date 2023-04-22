@@ -6,23 +6,27 @@
 #include "page.h"
 
 namespace journal {
+    
     // Enum for sort type
     enum Sort {
         ALPHABETICAL,
         CHRONILOGICAL,
     };
+    
     // Enum for sort direction
     enum SortDir {
         ASCENDING,
         DESCENDING,
     };
+    
     // Journal struct, a CDLL, each node containing a page
     struct Journal {
-        // private Node struct, containing prev and next pointers and a page
+    
+    // private Node struct, containing prev and next pointers and a page
     private: struct Node {
-            Page page;
-            Node* next{NULL};
-            Node* prev{NULL};
+            Page page; // Page object
+            Node* next{NULL}; // Next node in the journal
+            Node* prev{NULL}; // Previous node in the journal
 
             Node() {} // Default constructor
             Node(Page p): page(p) {} // Constructor taking a page
@@ -33,7 +37,8 @@ namespace journal {
         ~Journal() {} // Destructor
 
         void display(); // Prints out every page in order
-        void insert(Page page); 
+        void insert(Page page); // Inserts a page into the journal
+        void edit(unsigned key); // Edits a page with matching key
         void remove(unsigned key); // Removes page with matching key
         void sort(Sort type, SortDir dir); // Sorts based on enums from above
         void sort(function<bool(Page*, Page*)> predicate); // Sorts based on supplied function
@@ -44,9 +49,9 @@ namespace journal {
         Node* tail() { return this->_tail; }
 
     private:
-        string _name{""};
-        Node* _head{NULL}; // First node in the list
-        Node* _tail{NULL}; // Last node in the list
-        unsigned _size{0};
+        string _name{""}; // Name of the journal
+        Node* _head{NULL}; // First node in the journal
+        Node* _tail{NULL}; // Last node in the journal
+        unsigned _size{0}; // Size of the journal
     };
 }
