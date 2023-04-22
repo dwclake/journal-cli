@@ -1,7 +1,8 @@
-#include "../include/menu/menu.h"
+#include <sqlite3.h>
+
+#include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"
-#include <sqlite3.h>
 
 int main(int argc, char* argv[]) {
     using namespace app;

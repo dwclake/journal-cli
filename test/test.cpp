@@ -1,5 +1,3 @@
-#include <functional>
-#include <tuple>
 #include "test.h"
 
 namespace Test {
