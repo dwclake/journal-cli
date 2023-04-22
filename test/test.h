@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <tuple>
-#include "../include/menu/menu.h"
+#include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 
 namespace Test {
