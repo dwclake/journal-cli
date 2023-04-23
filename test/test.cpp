@@ -106,7 +106,7 @@ namespace Test {
         auto result1 = j.fetch(key1); // Try to fetch page with key2
 
         // If result is not nullopt, throw tuple with error value and message
-        if(result1 != nullopt || result2 != nullopt || result3 != nullopt) {
+        if(result1 || result2 || result3) {
             tuple<unsigned, string> error{1, 
                 "\033[31mError\033[0m: Journal remove test: removed page still found"};
             
