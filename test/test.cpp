@@ -1,7 +1,6 @@
 #include "test.h"
 
 namespace Test {
-    using namespace std;
 
     /* ---- Test functions wrapper which returns a vector of pointers to tests to be run in main ----- */
     vector<function<string()>>* tests() {
@@ -24,7 +23,7 @@ namespace Test {
 
         printf("--Testing journal insert\n");
 
-        unsigned result; // Return value to throw to main if their is an error
+        unsigned result; // Return value to throw to main if there is an error
 
         Journal j{"test"}; // Create new journal object
 
@@ -50,10 +49,10 @@ namespace Test {
 
         // If result is 1, throw tuple with error value and message
         if(result == 1) {
-            tuple<unsigned, string> error{result, 
-                "\033[31mError\033[0m: Journal insert test: journal size incorrect"};
-         
-            throw error;
+            throw tuple<unsigned, string> {
+                result,
+                "\033[31mError\033[0m: Journal insert test: journal size incorrect"
+            };
         }
 
         return "\033[32mPassed\033[0m: Journal insert test:"; // Return passing message
@@ -62,13 +61,13 @@ namespace Test {
     // Tests journal edit function - !THROWS
     string test_journal_edit() {
         printf("--Testing journal edit\n");
-        return {"\033[32mPassed:\033[0m Journal edit test:"};
+        return "\033[32mPassed:\033[0m Journal edit test:";
     }
 
     // Tests journal fetch function - !THROWS
     string test_journal_fetch() {
         printf("--Testing journal fetch\n");
-        return {"\033[32mPassed:\033[0m Journal fetch test:"};
+        return "\033[32mPassed:\033[0m Journal fetch test:";
     }
 
     // Tests journal remove function - !THROWS
@@ -94,9 +93,9 @@ namespace Test {
         unsigned key3 = p3.key(); // Store key of p3
 
         // Insert pages into the journal
-        j.insert(std::move(p1));
-        j.insert(std::move(p2));
-        j.insert(std::move(p3));
+        j.insert(p1);
+        j.insert(p2);
+        j.insert(p3);
 
         j.remove(key2); // Remove page with key2
         auto result2 = j.fetch(key2); // Try to fetch page with key2
@@ -105,20 +104,21 @@ namespace Test {
         j.remove(key1);
         auto result1 = j.fetch(key1); // Try to fetch page with key2
 
-        // If result is not nullopt, throw tuple with error value and message
-        if(result1 != nullopt || result2 != nullopt || result3 != nullopt) {
-            tuple<unsigned, string> error{1, 
-                "\033[31mError\033[0m: Journal remove test: removed page still found"};
-            
-            throw error;
+        // If any results contain a page pointer, throw tuple with error value and message
+        if(result1 || result2 || result3) {
+            //tuple<unsigned, string> error
+            throw tuple<unsigned, string> {
+                1,
+                "\033[31mError\033[0m: Journal remove test: removed page still found"
+            };
         }
 
-        return {"\033[32mPassed:\033[0m Journal remove test:"}; // Returned passing message
+        return "\033[32mPassed:\033[0m Journal remove test:"; // Returned passing message
     }
 
     // Tests journal sort function - !THROWS
     string test_journal_sort() {
         printf("--Testing journal sort\n");
-        return {"\033[32mPassed:\033[0m Journal sort test:"};
+        return "\033[32mPassed:\033[0m Journal sort test:";
     }
 }

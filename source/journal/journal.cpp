@@ -3,7 +3,7 @@
 namespace journal {
     
     // Journal insert function
-    void Journal::insert(Page page) {
+    void Journal::insert(const Page& page) {
         // If journal is empty, create new node and set head/tail pointers to it
         if(this->_size == 0) {
             this->_head = new Node(page);
@@ -30,9 +30,38 @@ namespace journal {
         this->_tail = temp;
         this->_size++;
     }
-
+    
+    // Journal insert function
+    void Journal::insert(Page&& page) {
+        // If journal is empty, create new node and set head/tail pointers to it
+        if(this->_size == 0) {
+            this->_head = new Node(std::move(page));
+            this->_tail = this->_head;
+            
+            // Create circular list
+            this->_head->next = this->_tail;
+            this->_head->prev = this->_tail;
+            
+            this->_tail->next = this->_head;
+            this->_tail->prev = this->_tail;
+            // Increment size and return
+            this->_size++;
+            return;
+        }
+        
+        // If journal is not empty, create new node and set tail->next to it
+        Node* temp = new Node(std::move(page));
+        temp->prev = this->_tail;
+        temp->next = this->_head;
+        this->_tail->next = temp;
+        
+        // Set new tail to temp
+        this->_tail = temp;
+        this->_size++;
+    }
+    
     // Journal fetch function
-    optional<Page*> Journal::fetch(unsigned key) {
+    optional<Page*> Journal::fetch(const unsigned& key) {
         if(this->_size == 0) return nullopt;
 
         // If journal is not empty, iterate through list until key is found
@@ -50,7 +79,7 @@ namespace journal {
     }
 
     // Journal remove function
-    void Journal::remove(unsigned key) {
+    void Journal::remove(const unsigned& key) {
         if(this->size() == 0) return;
 
         Node* current = this->_head;
@@ -94,12 +123,16 @@ namespace journal {
         delete current;
     }
 
-    void Journal::sort(Sort type, SortDir dir) {
+    void Journal::sort(const Sort& type, const SortDir& dir) {
 
     }
 
-    void Journal::sort(function<bool(Page*, Page*)> predicate) {
+    void Journal::sort(const function<bool(Page*, Page*)>& predicate) {
 
+    }
+    
+    void Journal::edit(const unsigned int& key) {
+    
     }
 
     // Journal display function
