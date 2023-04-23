@@ -1,17 +1,11 @@
 # Start with a base alpine image
-FROM ubuntu:lunar AS build
+FROM alpine:3.17.3 AS build
 
 # Install build tools and cmake
-RUN apt update && \
-    apt install -y \
-    cmake \
-    git \
-    curl \
-    zip \
-    unzip \
-    tar \
-    g++ \
-    pkg-config
+RUN apk update && \
+    apk add --no-cache \
+    build-base=0.5-r3 \
+    cmake=3.24.4-r0
     
 # Set the working directory
 WORKDIR /journal
@@ -20,13 +14,7 @@ WORKDIR /journal
 COPY source/ ./source/
 COPY include/ ./include/
 COPY test/ ./test/
-COPY vcpkg.json .
 COPY CMakeLists.txt .
-
-RUN git clone https://github.com/microsoft/vcpkg
-RUN ./vcpkg/bootstrap-vcpkg.sh
-
-RUN ./vcpkg/vcpkg install
 
 # Build the project with cmake and move the binary to the bin directory
 RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . && \

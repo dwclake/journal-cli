@@ -1,5 +1,3 @@
-#include <sqlite3.h>
-
 #include <cstring>
 
 #include "../include/app/menu.h"
@@ -12,8 +10,6 @@ int main(int argc, char* argv[]) {
     using namespace std;
 
 /* ---- Program testing -------------------------------------------------------------- */
-    
-    printf("Sqlite3 Version: %s\n", sqlite3_libversion()); // Print sqlite3 version
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
