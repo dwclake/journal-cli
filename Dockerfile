@@ -1,17 +1,20 @@
 # Start with a base alpine image
-FROM ubuntu:lunar AS build
+FROM alpine:3.17.3 AS build
 
 # Install build tools and cmake
-RUN apt update && \
-    apt install -y \
-    cmake \
+RUN apk update && \
+    apk add --no-cache \
     git \
     curl \
     zip \
     unzip \
     tar \
-    g++ \
-    pkg-config
+    g++ \ 
+    py3-pip \
+    pkgconfig \
+    make
+
+RUN pip install cmake ninja
     
 # Set the working directory
 WORKDIR /journal
@@ -29,7 +32,8 @@ RUN ./vcpkg/bootstrap-vcpkg.sh
 RUN ./vcpkg/vcpkg install
 
 # Build the project with cmake and move the binary to the bin directory
-RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . && \
+RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
+    "-DCMAKE_TOOLCHAIN_FILE=/journal/vcpkg/scripts/buildsystems/vcpkg.cmake" && \
     cmake --build build --parallel 8 && \
     mkdir bin && \
     mv build/journal-cli bin/journal-cli
