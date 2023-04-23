@@ -131,7 +131,7 @@ namespace journal {
 
     }
     
-    void Journal::edit(const unsigned int& key) {
+    void Journal::edit(const unsigned& key) {
     
     }
 
