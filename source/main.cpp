@@ -2,6 +2,7 @@
 
 #include <range/v3/all.hpp>
 #include <fmt/format.h>
+#include <matchit.h>
 
 #include "../include/app/menu.h"
 #include "../include/journal/journal.h"

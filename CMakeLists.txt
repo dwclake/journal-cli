@@ -9,8 +9,11 @@ set(CMAKE_CXX_STANDARD 23)
 
 find_package(fmt CONFIG REQUIRED)
 find_package(range-v3 CONFIG REQUIRED)
+find_package(matchit CONFIG REQUIRED)
 
-set(LIBS fmt::fmt range-v3::meta range-v3::concepts range-v3::range-v3)
+set(LIBS fmt::fmt 
+         range-v3::meta range-v3::concepts range-v3::range-v3
+         matchit::matchit)
 
 set(INCLUDE_DIR include)
 set(SOURCE_DIR source)
