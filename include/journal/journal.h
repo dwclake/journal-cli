@@ -23,17 +23,6 @@ namespace journal {
     
     // Journal struct, a CDLL, each node containing a page
     struct Journal {
-    
-    // private Node struct, containing prev and next pointers and a page
-    private: struct Node {
-            Page page; // Page object
-            Node* next{nullptr}; // Next node in the journal
-            Node* prev{nullptr}; // Previous node in the journal
-
-            Node() = default; // Default constructor
-            explicit Node(Page  p): page(std::move(p)) {} // Constructor taking a page
-        };
-    public:
         Journal() = default; // Default constructor
         explicit Journal(string name): _name(std::move(name)) {} // Constructor taking the name of journal
         ~Journal() = default; // Destructor
@@ -45,15 +34,17 @@ namespace journal {
         void remove(const unsigned& key); // Removes page with matching key
         void sort(const Sort& type, const SortDir& dir); // Sorts based on enums from above
         void sort(const function<bool(Page*, Page*)>& predicate); // Sorts based on supplied function
+        vector<Page>* pages() const { return const_cast<vector<Page>*>(&this->_pages); } // Returns pointer to pages
+        vector<Page>* mut_pages() { return &this->_pages; } // Returns copy of pages
         optional<Page*> fetch(const unsigned& key); // Finds page with matching key
         string name() const { return this->_name; }
         unsigned size() const { return this->_size; }
-        Node* head() { return this->_head; }
-        Node* tail() { return this->_tail; }
+
+        auto begin() { return this->_pages.begin(); } // Returns iterator to beginning of journal
+        auto end() { return this->_pages.end(); } // Returns iterator to end of journal
     private:
         string _name; // Name of the journal
-        Node* _head{nullptr}; // First node in the journal
-        Node* _tail{nullptr}; // Last node in the journal
+        vector<Page> _pages; 
         unsigned _size{0}; // Size of the journal
     };
 }

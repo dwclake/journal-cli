@@ -64,12 +64,12 @@ namespace journal {
         Page() = default; // Default constructor
         explicit Page(PageBuilder*); // Constructor taking a PageBuilder*
 
-        void display(); // Displays the page
+        void display() const; // Displays the page
         unsigned key() const { return this->_key; }
         string title() const { return this->_title; }
         string body() const { return this->_body; }
         Date date() const { return this->_date; }
-        vector<string>* tags() { return &this->_tags; }
+        vector<string>* tags() const { return const_cast<vector<string>*>(&this->_tags); }
 
         static PageBuilder* builder(); // Returns a PageBuilder*, used to build a new page
 

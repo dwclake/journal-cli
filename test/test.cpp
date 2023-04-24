@@ -1,4 +1,6 @@
 #include "test.h"
+#include <ranges>
+#include <algorithm>
 
 namespace Test {
 
@@ -97,6 +99,15 @@ namespace Test {
         j.insert(p2);
         j.insert(p3);
 
+        auto view = std::count_if(j.begin(), j.end(), [](const Page& p) { // Count number of pages in journal
+            return (p.key()%4 == 0)? false: true;
+        });
+
+        auto x = view | std::ranges::views::transform([](const Page& p) { // Print all pages in journal
+            p.display();
+            return p;
+        });
+
         j.remove(key2); // Remove page with key2
         auto result2 = j.fetch(key2); // Try to fetch page with key2
         j.remove(key3);
@@ -105,7 +116,7 @@ namespace Test {
         auto result1 = j.fetch(key1); // Try to fetch page with key2
 
         // If any results contain a page pointer, throw tuple with error value and message
-        if(result1 || result2 || result3) {
+        if(result1.has_value() || result2.has_value() || result3.has_value()) {
             //tuple<unsigned, string> error
             throw tuple<unsigned, string> {
                 1,

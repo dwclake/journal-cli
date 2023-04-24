@@ -59,7 +59,7 @@ namespace journal {
     }
 
     // Page display function
-    void Page::display() {
+    void Page::display() const {
         // Convert weekday to string
         string weekday;
         switch(this->date().day().weekday) {
