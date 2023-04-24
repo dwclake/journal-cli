@@ -9,7 +9,7 @@ RUN apk update && \
     zip \
     unzip \
     tar \
-    g++-12 \ 
+    g++ \ 
     py3-pip \
     pkgconfig \
     make
