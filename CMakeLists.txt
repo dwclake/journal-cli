@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 project(journal-cli)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 
 set(INCLUDE_DIR include)
 set(SOURCE_DIR source)

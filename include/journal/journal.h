@@ -40,8 +40,8 @@ namespace journal {
         string name() const { return this->_name; }
         unsigned size() const { return this->_size; }
 
-        auto begin() { return this->_pages.begin(); } // Returns iterator to beginning of journal
-        auto end() { return this->_pages.end(); } // Returns iterator to end of journal
+        vector<Page>::iterator begin() { return this->_pages.begin(); } // Returns iterator to beginning of journal
+        vector<Page>::iterator end() { return this->_pages.end(); } // Returns iterator to end of journal
     private:
         string _name; // Name of the journal
         vector<Page> _pages; 
