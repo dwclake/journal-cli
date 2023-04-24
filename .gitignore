@@ -7,4 +7,5 @@
 /vcpkg/packages/
 /vcpkg/downloads/
 /vcpkg/buildtrees/
-
+/vcpkg_installed/
+/vcpkg/
