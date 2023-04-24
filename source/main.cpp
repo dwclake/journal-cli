@@ -5,12 +5,17 @@
 #include "../include/journal/journal.h"
 #include "../test/test.h"
 
+#include <sqlite3.h>
+
 int main(int argc, char* argv[]) {
     using namespace std;
     using namespace app;
     using namespace journal;
 
 /* ---- Program testing -------------------------------------------------------------- */
+
+    printf("Sqlite3 Version: %s\n", sqlite3_libversion()); // Print sqlite3 version
+
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
