@@ -4,8 +4,17 @@ FROM alpine:3.17.3 AS build
 # Install build tools and cmake
 RUN apk update && \
     apk add --no-cache \
-    build-base=0.5-r3 \
-    cmake=3.24.4-r0
+    git \
+    curl \
+    zip \
+    unzip \
+    tar \
+    g++-12 \ 
+    py3-pip \
+    pkgconfig \
+    make
+
+RUN pip install cmake ninja
     
 # Set the working directory
 WORKDIR /journal
@@ -17,7 +26,8 @@ COPY test/ ./test/
 COPY CMakeLists.txt .
 
 # Build the project with cmake and move the binary to the bin directory
-RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . && \
+RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
+    "-DCMAKE_TOOLCHAIN_FILE=/journal/vcpkg/scripts/buildsystems/vcpkg.cmake" && \
     cmake --build build --parallel 8 && \
     mkdir bin && \
     mv build/journal-cli bin/journal-cli
