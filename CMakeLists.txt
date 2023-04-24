@@ -5,11 +5,7 @@ set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems
 
 project(journal-cli)
 
-set(CMAKE_CXX_STANDARD 20)
-
-find_package(unofficial-sqlite3 CONFIG REQUIRED)
-
-set(LIBS unofficial::sqlite3::sqlite3)
+set(CMAKE_CXX_STANDARD 23)
 
 set(INCLUDE_DIR include)
 set(SOURCE_DIR source)
@@ -29,4 +25,3 @@ set(TEST_FILES ${TEST_DIR}/test.h
                ${TEST_DIR}/test.cpp)
 
 add_executable(journal-cli ${SOURCE_DIR}/main.cpp ${INCLUDE_FILES} ${SOURCE_FILES} ${TEST_FILES})
-target_link_libraries(journal-cli PRIVATE ${LIBS})

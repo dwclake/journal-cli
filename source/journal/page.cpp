@@ -3,7 +3,7 @@
 namespace journal {
     // Static page function to start building new pages
     PageBuilder* Page::builder() {
-        PageBuilder* page = new PageBuilder;
+        auto* page = new PageBuilder;
 
         random_device rd;
         mt19937 generator(rd());
@@ -14,33 +14,37 @@ namespace journal {
     }
 
     // Adds a title to the page being built
-    PageBuilder* PageBuilder::title(string title) {
+    PageBuilder* PageBuilder::title(const string &title) {
         this->_title = title;
         return this;
     }
 
     // Adds a body to the page being built
-    PageBuilder* PageBuilder::body(string body) {
+    PageBuilder* PageBuilder::body(const string& body) {
         this->_body = body;
         return this;
     }
 
     // Adds a date to the page being built
-    PageBuilder* PageBuilder::date(Date date) {
+    PageBuilder* PageBuilder::date(const Date& date) {
         this->_date = date;
         return this;
     }
-
     // Adds a tag to the page being built, can be called as many times as needed
-    PageBuilder* PageBuilder::tag(string tag) {
+    PageBuilder* PageBuilder::tag(const string& tag) {
         this->_tags.push_back(tag);
+        return this;
+    }
+    
+    // Adds a tag to the page being built, can be called as many times as needed
+    PageBuilder* PageBuilder::tag(string&& tag) {
+        this->_tags.push_back(std::move(tag));
         return this;
     }
 
     // Builds the page and returns it
     Page PageBuilder::build() {
-        Page temp;
-        temp = this;
+        Page temp(this);
         delete this;
         return temp;
     }
@@ -55,7 +59,7 @@ namespace journal {
     }
 
     // Page display function
-    void Page::display() {
+    void Page::display() const {
         // Convert weekday to string
         string weekday;
         switch(this->date().day().weekday) {
@@ -95,7 +99,7 @@ namespace journal {
         printf("%s\n\n", this->body().c_str());
         // Print tags
         printf("tags: ");
-        for(string tag: *this->tags()) {
+        for(const string& tag: *this->tags()) {
             printf("[%s] ", tag.c_str());
         }
         printf("\n");

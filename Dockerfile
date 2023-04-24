@@ -9,7 +9,7 @@ RUN apk update && \
     zip \
     unzip \
     tar \
-    g++ \ 
+    g++-12 \ 
     py3-pip \
     pkgconfig \
     make
@@ -23,13 +23,7 @@ WORKDIR /journal
 COPY source/ ./source/
 COPY include/ ./include/
 COPY test/ ./test/
-COPY vcpkg.json .
 COPY CMakeLists.txt .
-
-RUN git clone https://github.com/microsoft/vcpkg
-RUN ./vcpkg/bootstrap-vcpkg.sh
-
-RUN ./vcpkg/vcpkg install
 
 # Build the project with cmake and move the binary to the bin directory
 RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
