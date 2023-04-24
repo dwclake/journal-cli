@@ -7,9 +7,10 @@ project(journal-cli)
 
 set(CMAKE_CXX_STANDARD 23)
 
-find_package(unofficial-sqlite3 CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
+find_package(range-v3 CONFIG REQUIRED)
 
-set(LIBS unofficial::sqlite3::sqlite3)
+set(LIBS fmt::fmt range-v3::meta range-v3::concepts range-v3::range-v3)
 
 set(INCLUDE_DIR include)
 set(SOURCE_DIR source)
