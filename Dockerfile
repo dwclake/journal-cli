@@ -32,8 +32,7 @@ RUN ./vcpkg/bootstrap-vcpkg.sh
 RUN ./vcpkg/vcpkg install
 
 # Build the project with cmake and move the binary to the bin directory
-RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
-    "-DCMAKE_TOOLCHAIN_FILE=/journal/vcpkg/scripts/buildsystems/vcpkg.cmake" && \
+RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . && \
     cmake --build build --parallel 8 && \
     mkdir bin && \
     mv build/journal-cli bin/journal-cli
