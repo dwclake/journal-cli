@@ -2,9 +2,9 @@ name: docker-test
      
 on:
   push:
-    branches: [ "vcpkg" ]
+    branches: [ "development" ]
   pull_request:
-    branches: [ "vcpkg" ]
+    branches: [ "development" ]
 
 jobs:
       

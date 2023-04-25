@@ -1,9 +1,5 @@
 #include <cstring>
 
-#include <range/v3/all.hpp>
-#include <fmt/format.h>
-
-
 #include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"
@@ -43,7 +39,7 @@ int main(int argc, char* argv[]) {
                 },
                 // If test_result has a value, print out the value and increment passed_count
                 pattern | true = [&] {
-                    printf("%s, returned %d\n", test_result.value().c_str(), 0); // Print out pass message
+                    printf("%s returned %d\n", test_result.value().c_str(), 0); // Print out pass message
                     passed_count++;
                 }
             );
