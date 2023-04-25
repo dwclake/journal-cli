@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
                 },
                 // If test_result has a value, print out the value and increment passed_count
                 pattern | true = [&] {
-                    printf("%s, returned %d\n", test_result.value().c_str(), 0); // Print out pass message
+                    printf("%s returned %d\n", test_result.value().c_str(), 0); // Print out pass message
                     passed_count++;
                 }
             );
