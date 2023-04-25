@@ -26,10 +26,9 @@ int main(int argc, char* argv[]) {
             using error = tuple<unsigned, string>; // Error type alias
 
             expected<string, error> test_result = test(); // Run test and store result in expected
-
             match(test_result.has_value()) (
                 // If test_result is an error, print out the error message
-                pattern | false  = [&] {
+                pattern | false = [&] {
                     int value; string message;          // Variables to store tuple values
                     tie(value, message) = test_result.error(); // Destructure tuple into individual variables
 
@@ -44,6 +43,7 @@ int main(int argc, char* argv[]) {
                 }
             );
         }
+        
         printf("Tests complete: %d/%d Tests Passed\n", passed_count, test_count);
         return return_val; // Returns 0 if all tests passed, 
                        // otherwise returns bitwise or of all test return values
