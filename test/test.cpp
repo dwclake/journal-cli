@@ -104,23 +104,32 @@ namespace Test {
         j.remove(key2); // Remove page with key2
         j.remove(key3); // Remove page with key3
         
-        auto pages = {
+        vector<std::optional<Page*>> pages = {
             j.fetch(key1), // Try to fetch page with key1
             j.fetch(key2), // Try to fetch page with key2
             j.fetch(key3)  // Try to fetch page with key3
         };
 
-        for(auto page: pages) { // Iterate through pages
-            Page* p; 
+        for(auto const& page: pages) { // Iterate through pages
+            Id<Page*> p; 
             match(page) ( // Match page
-                pattern | none = [] {}, // If page is none, do nothing
                 pattern | some(p) = [&] { // If page is some, set result to 1
                     result = 1;
-                    printf("Page with key %d found\n", p->key());
+                    printf("Page with key %u found\n", p.value()->key());
                 }
             );
         }
 
+        /* auto pages2 = pages | ::ranges::views::filter([](auto const& page) { // Filter out empty pages
+            return page.has_value();
+        }) | ::ranges::to<vector<std::optional<Page*>>>(); // Convert to vector
+
+        for(auto const& page: pages2) { // Iterate through pages
+            result = 1;
+            printf("Page with key %u found\n", page.value()->key());
+        } */
+
+   
         // If any result is 1, throw tuple with error value and message
         if(result) {
             return unexpected(error {

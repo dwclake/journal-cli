@@ -1,9 +1,5 @@
 #include <cstring>
 
-#include <range/v3/all.hpp>
-#include <fmt/format.h>
-
-
 #include "../include/app/menu.h"
 #include "../include/journal/journal.h"
 #include "../test/test.h"
