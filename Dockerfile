@@ -20,13 +20,16 @@ RUN pip install cmake ninja
 WORKDIR /journal
 
 # Copy the project files
+COPY .git/ ./.git/
 COPY source/ ./source/
 COPY include/ ./include/
 COPY test/ ./test/
 COPY vcpkg.json .
+COPY .gitmodules .
 COPY CMakeLists.txt .
 
-RUN git clone https://github.com/microsoft/vcpkg
+RUN git submodule init
+RUN git submodule update
 RUN ./vcpkg/bootstrap-vcpkg.sh
 
 RUN ./vcpkg/vcpkg install
