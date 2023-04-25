@@ -7,7 +7,7 @@ namespace journal {
 
         random_device rd;
         mt19937 generator(rd());
-        uniform_int_distribution<unsigned> distribution;
+        uniform_int_distribution<int> distribution;
 
         page->set_key(distribution(generator));
         return page;
@@ -103,5 +103,15 @@ namespace journal {
             printf("[%s] ", tag.c_str());
         }
         printf("\n");
+    }
+    
+    bool Page::operator ==(const Page& rhs) const {
+        if(this->_key != rhs.key()) return false;
+        return true;
+    }
+    
+    bool Page::operator !=(const Page& rhs) const {
+        if(*this == rhs) return false;
+        return true;
     }
 }
