@@ -5,7 +5,7 @@
 # For development
 Main Requirements to build the project without building the docker image:
 1. cmake version >= 3.25.1
-2. g++ version >= 12.0.0
+2. g++ version >= 12
 
 To build and run the project without building the docker image:
 ```bash
