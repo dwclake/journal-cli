@@ -37,24 +37,24 @@ namespace journal {
     // Structure containing a weekday and a day
     struct Day {
         Weekday weekday{Weekday::MONDAY}; // Default weekday is Monday
-        unsigned day{1}; // Default day is 1
+        int day{1}; // Default day is 1
 
         Day() = default; // Default constructor
-        Day(Weekday w, unsigned d): weekday(w), day(d) {} // Constructor taking a weekday and a day
+        Day(Weekday w, int d): weekday(w), day(d) {} // Constructor taking a weekday and a day
     };
 
     // Structure containing a month, a day, and a year
     struct Date {
         Month month() const { return this->_month; }
         Day day() const { return this->_day; }
-        unsigned year() const { return this->_year; }
+        int year() const { return this->_year; }
         
         Date() = default; // Default constructor
-        Date(Month m, Day d, unsigned y): _month(m), _day(d), _year(y) {} // Constructor taking a month, a day, and a year
+        Date(Month m, Day d, int y): _month(m), _day(d), _year(y) {} // Constructor taking a month, a day, and a year
     private:
         Month _month{Month::JANUARY}; // Default month is January
         Day _day{Weekday::MONDAY, 1}; // Default day is Monday, 1
-        unsigned _year{1900}; // Default year is 1900
+        int _year{1900}; // Default year is 1900
     };
 
 
@@ -65,16 +65,19 @@ namespace journal {
         explicit Page(PageBuilder*); // Constructor taking a PageBuilder*
 
         void display() const; // Displays the page
-        unsigned key() const { return this->_key; }
+        int key() const { return this->_key; }
         string title() const { return this->_title; }
         string body() const { return this->_body; }
         Date date() const { return this->_date; }
         vector<string>* tags() const { return const_cast<vector<string>*>(&this->_tags); }
+        
+        bool operator ==(const Page&) const;
+        bool operator !=(const Page&) const;
 
         static PageBuilder* builder(); // Returns a PageBuilder*, used to build a new page
 
     private:
-        unsigned _key{0};  // Key used to identify the page
+        int _key{0};  // Key used to identify the page
         string _title; // Title of the page
         string _body; // Body/Content of the page
         Date _date; // Date of the page
@@ -90,15 +93,15 @@ namespace journal {
         PageBuilder* tag(string&&); // Adds a tag to the page
         Page build(); // Builds the page and returns it
 
-        unsigned key() const { return this->_key; }
-        void set_key(unsigned key) { this->_key = key; }
+        int key() const { return this->_key; }
+        void set_key(int key) { this->_key = key; }
         string title() const { return this->_title; }
         string body() const { return this->_body; }
         Date date() const { return this->_date; }
         vector<string>* tags() { return &this->_tags; }
 
     private:
-        unsigned _key{0}; // Key used to identify the page
+        int _key{0}; // Key used to identify the page
         string _title; // Title of the page
         string _body; // Body/Content of the page
         Date _date; // Date of the page

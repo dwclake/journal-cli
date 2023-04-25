@@ -16,14 +16,14 @@ int main(int argc, char* argv[]) {
         auto tests = Test::tests(); // Returns a vector of test function pointers
 
         unsigned test_count = tests->size(); // Count of tests to be run
-        unsigned passed_count{0}; // Count of tests which passed
+        int passed_count{0}; // Count of tests which passed
         
         system("clear");
         printf("Running %d Tests:\n", test_count);
         
         int return_val{0}; // return value for main
         for (auto &test : *tests) {
-            using error = tuple<unsigned, string>; // Error type alias
+            using error = tuple<int, string>; // Error type alias
 
             expected<string, error> test_result = test(); // Run test and store result in expected
             match(test_result.has_value()) (

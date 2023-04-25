@@ -12,7 +12,7 @@
 namespace Test {
     using namespace std;
 
-    using error = tuple<unsigned, string>; // Error type alias
+    using error = tuple<int, string>; // Error type alias
 
     vector<function<expected<string, error>()>>* tests(); // Runs all tests and returns a vector of tuples containing the result of each test
                                          

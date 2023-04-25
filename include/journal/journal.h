@@ -29,14 +29,11 @@ namespace journal {
 
         void display(); // Prints out every page in order
         void insert(const Page& page); // Inserts a page into the journal
-        void insert(Page&& page); // Inserts a page into the journal
-        void edit(const unsigned& key); // Edits a page with matching key
-        void remove(const unsigned& key); // Removes page with matching key
-        void sort(const Sort& type, const SortDir& dir); // Sorts based on enums from above
+        void remove(const int& key); // Removes page with matching key
         void sort(const function<bool(Page*, Page*)>& predicate); // Sorts based on supplied function
         vector<Page>* pages() const { return const_cast<vector<Page>*>(&this->_pages); } // Returns pointer to pages
         vector<Page>* mut_pages() { return &this->_pages; } // Returns copy of pages
-        optional<Page*> fetch(const unsigned& key); // Finds page with matching key
+        optional<Page*> fetch(const int& key); // Finds page with matching key
         string name() const { return this->_name; }
         unsigned size() const { return this->_size; }
 
@@ -46,5 +43,8 @@ namespace journal {
         string _name; // Name of the journal
         vector<Page> _pages; 
         unsigned _size{0}; // Size of the journal
+        
+        int partition(int lo, int hi, const function<bool(Page * , Page * )>& predicate);
+        void quicksort(int lo, int hi, const function<bool(Page * , Page * )>& predicate);
     };
 }
