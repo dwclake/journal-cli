@@ -159,16 +159,6 @@ namespace Test {
             );
         }
 
-        /* auto pages2 = pages | ::ranges::views::filter([](auto const& page) { // Filter out empty pages
-            return page.has_value();
-        }) | ::ranges::to<vector<std::optional<Page*>>>(); // Convert to vector
-
-        for(auto const& page: pages2) { // Iterate through pages
-            result = 1;
-            printf("Page with key %u found\n", page.value()->key());
-        } */
-
-   
         // If any result is 1, return tuple with error value and message
         if(result) {
             return unexpected(error {
