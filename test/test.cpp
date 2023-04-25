@@ -73,6 +73,9 @@ namespace Test {
     // Tests journal remove function
     expected<string, error> test_journal_remove() {
         using namespace journal;
+        using namespace matchit;
+
+        int result{0};
 
         printf("--Testing journal remove\n");
 
@@ -97,16 +100,29 @@ namespace Test {
         j.insert(p2);
         j.insert(p3);
 
+        j.remove(key1); // Remove page with key1
         j.remove(key2); // Remove page with key2
-        auto result2 = j.fetch(key2); // Try to fetch page with key2
-        j.remove(key3);
-        auto result3 = j.fetch(key3); // Try to fetch page with key2
-        j.remove(key1);
-        auto result1 = j.fetch(key1); // Try to fetch page with key2
+        j.remove(key3); // Remove page with key3
+        
+        auto pages = {
+            j.fetch(key1), // Try to fetch page with key1
+            j.fetch(key2), // Try to fetch page with key2
+            j.fetch(key3)  // Try to fetch page with key3
+        };
 
-        // If any results contain a page pointer, throw tuple with error value and message
-        if(result1.has_value() || result2.has_value() || result3.has_value()) {
-            //tuple<unsigned, string> error
+        for(auto page: pages) { // Iterate through pages
+            Page* p; 
+            match(page) ( // Match page
+                pattern | none = [] {}, // If page is none, do nothing
+                pattern | some(p) = [&] { // If page is some, set result to 1
+                    result = 1;
+                    printf("Page with key %d found\n", p->key());
+                }
+            );
+        }
+
+        // If any result is 1, throw tuple with error value and message
+        if(result) {
             return unexpected(error {
                 1,
                 "\033[31mError\033[0m: Journal remove test: removed page still found"

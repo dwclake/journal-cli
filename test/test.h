@@ -1,11 +1,9 @@
 #pragma once
 
-#include <vector>
 #include <tuple>
-#include <functional>
-#include <ranges>
 #include <algorithm>
 #include <expected>
+#include <matchit.h>
 
 #include "../include/app/menu.h"
 #include "../include/journal/journal.h"

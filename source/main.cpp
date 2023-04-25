@@ -2,7 +2,7 @@
 
 #include <range/v3/all.hpp>
 #include <fmt/format.h>
-#include <matchit.h>
+
 
 #include "../include/app/menu.h"
 #include "../include/journal/journal.h"
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 
             match(test_result.has_value()) (
                 // If test_result is an error, print out the error message
-                pattern | false  = [&]() {
+                pattern | false  = [&] {
                     int value; string message;          // Variables to store tuple values
                     tie(value, message) = test_result.error(); // Destructure tuple into individual variables
 
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
                     printf("%s, returned %d\n", message.c_str(), value); // Print out fail message
                 },
                 // If test_result has a value, print out the value and increment passed_count
-                pattern | true = [&]() -> void {
+                pattern | true = [&] {
                     printf("%s, returned %d\n", test_result.value().c_str(), 0); // Print out pass message
                     passed_count++;
                 }
