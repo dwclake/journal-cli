@@ -4,8 +4,17 @@ FROM alpine:3.17.3 AS build
 # Install build tools and cmake
 RUN apk update && \
     apk add --no-cache \
-    build-base=0.5-r3 \
-    cmake=3.24.4-r0
+    git \
+    curl \
+    zip \
+    unzip \
+    tar \
+    g++ \ 
+    py3-pip \
+    pkgconfig \
+    make
+
+RUN pip install cmake ninja
     
 # Set the working directory
 WORKDIR /journal
@@ -14,16 +23,20 @@ WORKDIR /journal
 COPY source/ ./source/
 COPY include/ ./include/
 COPY test/ ./test/
+COPY vcpkg.json .
 COPY CMakeLists.txt .
 
-# Set the build directory
-WORKDIR /journal/build
+RUN git clone https://github.com/microsoft/vcpkg
+RUN ./vcpkg/bootstrap-vcpkg.sh
+
+RUN ./vcpkg/vcpkg install
 
 # Build the project with cmake and move the binary to the bin directory
-RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
-    cmake --build . --parallel 8 && \
-    mkdir ../bin && \
-    mv journal-cli ../bin/journal-cli
+RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
+    "-DCMAKE_TOOLCHAIN_FILE=/journal/vcpkg/scripts/buildsystems/vcpkg.cmake" && \
+    cmake --build build --parallel 8 && \
+    mkdir bin && \
+    mv build/journal-cli bin/journal-cli
 
 # Start with a base alpine image
 FROM alpine:3.17.3 

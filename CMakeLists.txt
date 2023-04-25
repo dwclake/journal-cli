@@ -1,7 +1,19 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.25.1)
+
+set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
+      CACHE STRING "Vcpkg toolchain file")
+
 project(journal-cli)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
+
+find_package(fmt CONFIG REQUIRED)
+find_package(range-v3 CONFIG REQUIRED)
+find_package(matchit CONFIG REQUIRED)
+
+set(LIBS fmt::fmt 
+         range-v3::meta range-v3::concepts range-v3::range-v3
+         matchit::matchit)
 
 set(INCLUDE_DIR include)
 set(SOURCE_DIR source)
@@ -21,3 +33,4 @@ set(TEST_FILES ${TEST_DIR}/test.h
                ${TEST_DIR}/test.cpp)
 
 add_executable(journal-cli ${SOURCE_DIR}/main.cpp ${INCLUDE_FILES} ${SOURCE_FILES} ${TEST_FILES})
+target_link_libraries(journal-cli PRIVATE ${LIBS})

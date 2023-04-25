@@ -1,14 +1,11 @@
-#include <functional>
-#include <tuple>
 #include "test.h"
 
 namespace Test {
-    using namespace std;
 
     /* ---- Test functions wrapper which returns a vector of pointers to tests to be run in main ----- */
-    vector<function<string()>>* tests() {
+    vector<function<expected<string, error>()>>* tests() {
 
-        static vector<function<string()>> tests = {
+        static vector<function<expected<string, error>()>> tests = {
             test_journal_insert,
             test_journal_edit,
             test_journal_fetch,
@@ -20,13 +17,13 @@ namespace Test {
 
     /* ---- Program tests ---------------------------------------------------------------------------- */
 
-    // Tests journal insert function - !THROWS
-    string test_journal_insert() {
+    // Tests journal insert function
+    expected<string, error> test_journal_insert() {
         using namespace journal;
 
         printf("--Testing journal insert\n");
 
-        unsigned result; // Return value to throw to main if their is an error
+        unsigned result; // Return value to throw to main if there is an error
 
         Journal j{"test"}; // Create new journal object
 
@@ -52,30 +49,33 @@ namespace Test {
 
         // If result is 1, throw tuple with error value and message
         if(result == 1) {
-            tuple<unsigned, string> error{result, 
-                "\033[31mError\033[0m: Journal insert test: journal size incorrect"};
-         
-            throw error;
+            return unexpected( error {
+                result,
+                "\033[31mError\033[0m: Journal insert test: journal size incorrect"
+            });
         }
 
         return "\033[32mPassed\033[0m: Journal insert test:"; // Return passing message
     }
 
-    // Tests journal edit function - !THROWS
-    string test_journal_edit() {
+    // Tests journal edit function
+    expected<string, error> test_journal_edit() {
         printf("--Testing journal edit\n");
-        return {"\033[32mPassed:\033[0m Journal edit test:"};
+        return "\033[32mPassed:\033[0m Journal edit test:";
     }
 
-    // Tests journal fetch function - !THROWS
-    string test_journal_fetch() {
+    // Tests journal fetch function
+    expected<string, error> test_journal_fetch() {
         printf("--Testing journal fetch\n");
-        return {"\033[32mPassed:\033[0m Journal fetch test:"};
+        return "\033[32mPassed:\033[0m Journal fetch test:";
     }
 
-    // Tests journal remove function - !THROWS
-    string test_journal_remove() {
+    // Tests journal remove function
+    expected<string, error> test_journal_remove() {
         using namespace journal;
+        using namespace matchit;
+
+        int result{0};
 
         printf("--Testing journal remove\n");
 
@@ -96,31 +96,45 @@ namespace Test {
         unsigned key3 = p3.key(); // Store key of p3
 
         // Insert pages into the journal
-        j.insert(std::move(p1));
-        j.insert(std::move(p2));
-        j.insert(std::move(p3));
+        j.insert(p1);
+        j.insert(p2);
+        j.insert(p3);
 
+        j.remove(key1); // Remove page with key1
         j.remove(key2); // Remove page with key2
-        auto result2 = j.fetch(key2); // Try to fetch page with key2
-        j.remove(key3);
-        auto result3 = j.fetch(key3); // Try to fetch page with key2
-        j.remove(key1);
-        auto result1 = j.fetch(key1); // Try to fetch page with key2
+        j.remove(key3); // Remove page with key3
+        
+        auto pages = {
+            j.fetch(key1), // Try to fetch page with key1
+            j.fetch(key2), // Try to fetch page with key2
+            j.fetch(key3)  // Try to fetch page with key3
+        };
 
-        // If result is not nullopt, throw tuple with error value and message
-        if(result1 != nullopt || result2 != nullopt || result3 != nullopt) {
-            tuple<unsigned, string> error{1, 
-                "\033[31mError\033[0m: Journal remove test: removed page still found"};
-            
-            throw error;
+        for(auto page: pages) { // Iterate through pages
+            Page* p; 
+            match(page) ( // Match page
+                pattern | none = [] {}, // If page is none, do nothing
+                pattern | some(p) = [&] { // If page is some, set result to 1
+                    result = 1;
+                    printf("Page with key %d found\n", p->key());
+                }
+            );
         }
 
-        return {"\033[32mPassed:\033[0m Journal remove test:"}; // Returned passing message
+        // If any result is 1, throw tuple with error value and message
+        if(result) {
+            return unexpected(error {
+                1,
+                "\033[31mError\033[0m: Journal remove test: removed page still found"
+            });
+        }
+
+        return "\033[32mPassed:\033[0m Journal remove test:"; // Returned passing message
     }
 
-    // Tests journal sort function - !THROWS
-    string test_journal_sort() {
+    // Tests journal sort function
+    expected<string, error> test_journal_sort() {
         printf("--Testing journal sort\n");
-        return {"\033[32mPassed:\033[0m Journal sort test:"};
+        return "\033[32mPassed:\033[0m Journal sort test:";
     }
 }
