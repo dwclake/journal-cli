@@ -47,7 +47,7 @@ namespace Test {
 
         result = (j.size() == 3)? 0: 1; // If journal size is 3, set result to 0, otherwise set it to 1
 
-        // If result is 1, throw tuple with error value and message
+        // If result is 1, return tuple with error value and message
         if(result == 1) {
             return unexpected( error {
                 result,
@@ -66,7 +66,53 @@ namespace Test {
 
     // Tests journal fetch function
     expected<string, error> test_journal_fetch() {
+        using namespace journal;
+        using namespace matchit;
+        
+        int result{0};
+        
         printf("--Testing journal fetch\n");
+        
+        Journal j{"test"}; // Create new journal object
+        
+        // Create a page to add to the journal
+        Page page = Page::builder()
+            ->title("Konbanwa!")
+            ->build();
+        unsigned key = page.key(); // Store key of p
+        
+        j.insert(page); // Insert page into the journal
+        
+        // Attempt to fetch page with key, and match the result
+        match(j.fetch(key)) (
+            pattern | none = [&] { // If p is none, set result to 1
+                result = 1;
+            }
+        );
+        // If result is 1, return tuple with error value and message
+        if(result == 1) {
+            return unexpected( error {
+                    result,
+                    "\033[31mError\033[0m: Journal fetch test: fetch returned none when page exists"
+            });
+        }
+        
+        // Attempt to fetch page with key + 1, and match the result
+        Id<Page*> p;
+        match(j.fetch(key + 1)) (
+            pattern | some(p) = [&] { // If p is some(Page*), set result to 1
+                result = 1;
+            }
+        );
+        // If result is 1, return tuple with error value and message
+        if(result == 1) {
+            return unexpected( error {
+                result,
+                "\033[31mError\033[0m: Journal fetch test: fetch returned a Page* when page does not exist"
+            });
+        }
+        
+        
         return "\033[32mPassed:\033[0m Journal fetch test:";
     }
 
@@ -130,7 +176,7 @@ namespace Test {
         } */
 
    
-        // If any result is 1, throw tuple with error value and message
+        // If any result is 1, return tuple with error value and message
         if(result) {
             return unexpected(error {
                 1,
