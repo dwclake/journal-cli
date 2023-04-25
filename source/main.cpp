@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
     using namespace std;
     using namespace app;
     using namespace journal;
-
+    using namespace matchit;
 /* ---- Program testing -------------------------------------------------------------- */
 
     // If program started with --test argument, runs tests instead of program
@@ -31,19 +31,22 @@ int main(int argc, char* argv[]) {
 
             expected<string, error> test_result = test(); // Run test and store result in expected
 
-            // If test_result has a value, print out the value and increment passed_count
-            if (test_result.has_value()) {
-                std::printf("%s returned %d\n", test_result.value().c_str(), 0); // Print out pass message
-                passed_count++;
-                
-            } else { // Otherwise, print out the error message
-                int value; string message;          // Variables to store tuple values
-                tie(value, message) = test_result.error(); // Destructure tuple into individual variables
+            match(test_result.has_value()) (
+                // If test_result is an error, print out the error message
+                pattern | false  = [&]() {
+                    int value; string message;          // Variables to store tuple values
+                    tie(value, message) = test_result.error(); // Destructure tuple into individual variables
 
-                return_val = return_val | value; // Bitwise or the result and the value of the current test
+                    return_val = return_val | value; // Bitwise or the result and the value of the current test
 
-                printf("%s, returned %d\n", message.c_str(), value); // Print out fail message
-            }
+                    printf("%s, returned %d\n", message.c_str(), value); // Print out fail message
+                },
+                // If test_result has a value, print out the value and increment passed_count
+                pattern | true = [&]() -> void {
+                    printf("%s, returned %d\n", test_result.value().c_str(), 0); // Print out pass message
+                    passed_count++;
+                }
+            );
         }
         printf("Tests complete: %d/%d Tests Passed\n", passed_count, test_count);
         return return_val; // Returns 0 if all tests passed, 
