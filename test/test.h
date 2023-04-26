@@ -18,8 +18,6 @@ namespace Test {
                                          
     // Tests journal insert function
     expected<string, error> test_journal_insert(); 
-    // Tests journal edit function
-    expected<string, error> test_journal_edit(); 
     // Tests journal fetch function
     expected<string, error> test_journal_fetch(); 
     // Tests journal remove function

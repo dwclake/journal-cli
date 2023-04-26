@@ -159,16 +159,6 @@ namespace Test {
             );
         }
 
-        /* auto pages2 = pages | ::ranges::views::filter([](auto const& page) { // Filter out empty pages
-            return page.has_value();
-        }) | ::ranges::to<vector<std::optional<Page*>>>(); // Convert to vector
-
-        for(auto const& page: pages2) { // Iterate through pages
-            result = 1;
-            printf("Page with key %u found\n", page.value()->key());
-        } */
-
-   
         // If any result is 1, return tuple with error value and message
         if(result) {
             return unexpected(error {
@@ -215,11 +205,10 @@ namespace Test {
         });
         
         // Order should now be [p1, p3, p2]
+        vector<Page> expected_order = {p1, p3, p2};
         // If any page is not in the correct spot, set result to 1
         auto pages = j.pages();
-        if((*pages)[0] != p1) result = 1;
-        if((*pages)[1] != p3) result = 1;
-        if((*pages)[2] != p2) result = 1;
+        if((*pages) != expected_order) result = 1;
         
         // If any result is 1, return tuple with error value and message
         if(result) {

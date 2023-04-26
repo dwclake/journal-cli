@@ -7,13 +7,18 @@ Main Requirements to build the project without building the docker image:
 1. cmake version >= 3.25.1
 2. g++ version >= 12
 
-To build and run the project without building the docker image:
+Setup project:
 ```bash
-$ cd /path/to/journal-cli
+$ git clone https://github.com/dwclake/journal-cli.git
+$ cd journal-cli
 $ git submodule init
 $ git submodule update
 $ ./vcpkg/bootstrap-vcpkg.sh
+```
+Build and run project:
+```bash
 $ cmake -B build -S .
+$ cmake --build build
 $ ./build/journal-cli
 ```
 # License
