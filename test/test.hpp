@@ -4,7 +4,7 @@
 #include <expected>
 #include <matchit.h>
 //#include <range/v3/all.hpp>
-//#include <fmt/format.h>
+#include <fmt/format.h>
 
 #include "../include/app/menu.hpp"
 #include "../include/journal/journal.hpp"
