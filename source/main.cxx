@@ -77,6 +77,10 @@ int main(int argc, char* argv[]) {
         (*menu->fn("input"))(menu);
     };
 
+    auto input = []() {
+
+    };
+
     auto main_input = [&](Menu* menu) -> void {
         printf("Select a option\n> ");
 
