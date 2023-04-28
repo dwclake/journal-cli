@@ -1,4 +1,4 @@
-#include "../../include/journal/page.h"
+#include "../../include/journal/page.hpp"
 
 namespace journal {
     // Static page function to start building new pages

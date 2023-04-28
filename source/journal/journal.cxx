@@ -1,4 +1,4 @@
-#include "../../include/journal/journal.h"
+#include "../../include/journal/journal.hpp"
 
 namespace journal {
     

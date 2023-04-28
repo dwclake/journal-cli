@@ -4,7 +4,7 @@
 #include <functional>
 #include <optional>
 #include <utility>
-#include "page.h"
+#include "page.hpp"
 
 namespace journal {
     using namespace std;

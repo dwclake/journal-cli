@@ -1,8 +1,8 @@
 #include <cstring>
 
-#include "../include/app/menu.h"
-#include "../include/journal/journal.h"
-#include "../test/test.h"
+#include "../include/app/menu.hpp"
+#include "../include/journal/journal.hpp"
+#include "../test/test.hpp"
 
 int main(int argc, char* argv[]) {
     using namespace std;
