@@ -1,8 +1,9 @@
 #include <cstring>
+#include <iostream>
 
-#include "../include/app/menu.h"
-#include "../include/journal/journal.h"
-#include "../test/test.h"
+#include "../include/app/menu.hpp"
+#include "../include/journal/journal.hpp"
+#include "../test/test.hpp"
 
 int main(int argc, char* argv[]) {
     using namespace std;
@@ -52,7 +53,15 @@ int main(int argc, char* argv[]) {
 /* ---- End of program testing --------------------------------------------------------- */
 
     bool exit = false; // Bool to control main program loop
-    
+
+    Menu create_journal = Menu::builder()
+        ->title("Create Journal\n")
+        ->build();
+
+    Menu open_journal = Menu::builder()
+        ->title("Open Journal\n") 
+        ->build();
+
     // Display lambda for main menu
     auto main_display = [&](Menu* menu) -> void {
         system("clear"); // Clear terminal
@@ -62,14 +71,34 @@ int main(int argc, char* argv[]) {
         menu->for_each([](const Menu& sub) -> void {
                 printf("%s", sub.title().c_str());
         });
-
-        exit = true; // Exit main loop
+        printf("\n");        
+        
+        // Call main menu input fn
+        (*menu->fn("input"))(menu);
     };
+
+    auto input = []() {
+
+    };
+
+    auto main_input = [&](Menu* menu) -> void {
+        printf("Select a option\n> ");
+
+        string response;
+
+        cin >> response;
+
+        exit = true;
+    };
+
     // Create new menu, main_menu, and give it a title and the display lambda with the key "main".
     // "main" function is automatically called when object is called as a function ie: main_menu();
     Menu main_menu = Menu::builder()
         ->title("\t\t\t -- Main Menu --\n")
         ->fn("main", main_display)
+        ->fn("input", main_input)
+        ->sub_menu("create", create_journal)
+        ->sub_menu("open", open_journal)
         ->build(); 
     
     while(!exit) main_menu(); // Run main menu until exit is set true
