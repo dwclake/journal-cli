@@ -2,13 +2,14 @@
 
 #include <tuple>
 #include <expected>
+
 #include <matchit.h>
 //#include <range/v3/all.hpp>
 
 #include "../include/app/menu.hpp"
 #include "../include/journal/journal.hpp"
 
-namespace jcli::test {
+namespace jcli::journal::test {
     using namespace std;
 
     using error = tuple<int, string>; // Error type alias
