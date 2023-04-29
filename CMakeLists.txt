@@ -37,7 +37,9 @@ add_executable(journal-cli ${SOURCE_DIR}/main.cxx ${INCLUDE_FILES}
                            ${SOURCE_FILES})
 target_link_libraries(journal-cli PRIVATE ${LIBS})
 
-add_executable(journal-cli-test ${TEST_DIR}/test.cxx ${TEST_FILES})
+add_executable(journal-cli-test ${TEST_DIR}/test.cxx 
+                                ${TEST_FILES} ${INCLUDE_FILES} 
+                                ${SOURCE_FILES})
 target_link_libraries(journal-cli-test PRIVATE ${LIBS})
 
 enable_testing()
@@ -46,5 +48,3 @@ add_test(
     NAME journal-test
     COMMAND $<TARGET_FILE:journal-cli-test> --journal
 )
-
-

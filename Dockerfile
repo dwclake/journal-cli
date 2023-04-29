@@ -39,7 +39,8 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
     "-DCMAKE_TOOLCHAIN_FILE=/journal/vcpkg/scripts/buildsystems/vcpkg.cmake" && \
     cmake --build build --parallel 8 && \
     mkdir bin && \
-    mv build/journal-cli bin/journal-cli
+    mv build/journal-cli bin/journal-cli && \
+    mv build/journal-cli-test bin/journal-cli-test
 
 # Start with a base alpine image
 FROM alpine:3.17.3 
@@ -57,6 +58,10 @@ USER shs
 COPY --chown=shs:shs --from=build \
     ./journal/bin/journal-cli \
     ./app/journal-cli
+
+COPY --chown=shs:shs --from=build \
+    ./journal/bin/journal-cli-test \
+    ./app/journal-cli-test
 
 # Set the entrypoint
 ENTRYPOINT [ "./app/journal-cli" ]

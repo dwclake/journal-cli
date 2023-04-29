@@ -59,7 +59,7 @@ namespace jcli::journal::test {
 
     // Tests journal fetch function
     expected<string, error> test_journal_fetch() {
-        using namespace journal;
+        using namespace jcli::journal;
         using namespace matchit;
         
         int result{0};
