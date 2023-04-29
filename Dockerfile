@@ -50,10 +50,10 @@ FROM alpine:3.17.3
 # Install libstdc++
 RUN apk update && \
     apk add --no-cache \
-    libstdc++ \
-    py3-pip
+    libstdc++
+#    py3-pip
 
-RUN pip install cmake
+#RUN pip install cmake
 
 # create a user and group
 RUN addgroup -S shs && adduser -S shs -G shs
