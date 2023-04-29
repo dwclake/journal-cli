@@ -42,7 +42,7 @@ RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
     cmake --build build --parallel 8 && \
     mkdir bin && \
     mv build/journal-cli bin/journal-cli && \
-    mv build/journal-cli-test bin/journal-cli-test && \
+    mv build/journal-cli-test bin/journal-cli-test
 
 # Start with a base alpine image
 FROM alpine:3.17.3 
