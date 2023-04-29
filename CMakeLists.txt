@@ -23,12 +23,14 @@ set(TEST_DIR test)
 set(INCLUDE_FILES ${INCLUDE_DIR}/app/menu.hpp
                   ${INCLUDE_DIR}/journal/journal.hpp
                   ${INCLUDE_DIR}/journal/page.hpp
-                  ${INCLUDE_DIR}/utility/utility.hpp)
+                  ${INCLUDE_DIR}/utility/utility.hpp
+                  ${INCLUDE_DIR}/input/input.hpp)
 
 set(SOURCE_FILES  ${SOURCE_DIR}/app/menu.cxx 
                   ${SOURCE_DIR}/journal/journal.cxx
                   ${SOURCE_DIR}/journal/page.cxx
-                  ${SOURCE_DIR}/utility/utility.cxx)
+                  ${SOURCE_DIR}/utility/utility.cxx
+                  ${SOURCE_DIR}/input/input.txx)
 
 set(TEST_FILES ${TEST_DIR}/journal/journal_test.hpp
                ${TEST_DIR}/journal/journal_test.cxx)

@@ -5,31 +5,8 @@
 
 #include "../include/app/menu.hpp"
 #include "../include/journal/journal.hpp"
+#include "../include/input/input.hpp"
 #include "../include/utility/utility.hpp"
-
-// Checks if response matches any of the args
-template<class T>
-bool check_input(T response, std::vector<T> &args) {
-    for(T arg: args) { // For each arg in args, check if arg == response
-        if(arg == response) return true;
-    }
-
-    return false;
-}   
-
-// Gets input from user, checks if input matches any of the args
-// args must be of the same type as response, and one arg is required
-template<class T, class... S>
-void get_input(T &response, T arg, S... args) {
-    std::vector<T> vec{arg, args...}; // Create vector from args
-    do { // Do while response is not in vec
-        std::cin >> response;
-
-        if(!check_input(response, vec)) {
-            fmt::print("Input not recognized, please try again\n> ");
-        }
-    } while(!check_input(response, vec));
-}
 
 int main(int argc, char* argv[]) {
     using namespace std;
@@ -69,12 +46,15 @@ int main(int argc, char* argv[]) {
     auto main_input = [&](app::Menu* menu) -> void {
         fmt::print("Select a option\n> ");
 
-        // Get user input
-        char response;
-        get_input(response, 
-            'c', 'o', 'e', 
-            'C', 'O', 'E'
-        );
+        // Create input hander object with a vector of chars user input must match
+        input::InputHandler<char> input({
+            'o', 'c', 'e',
+            'O', 'C', 'E'
+        });
+        // Get user input by calling input object
+        char response = input();
+        response = tolower(response); // Set reponse to lowercase
+
         // Match response 
         match(response) (
             // If response is "create", call create_journal display fn
