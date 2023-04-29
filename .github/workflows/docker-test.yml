@@ -17,7 +17,9 @@ jobs:
       uses: actions/checkout@v3
     - name: Build docker images
       run: docker build -t journal-cli -f Dockerfile .
-    - name: Test image
-      run: docker run --rm --entrypoint ./app/journal-cli-test journal-cli --journal 
-
-
+    - name: Run image with shell
+      run: docker run -it --rm --entrypoint /bin/sh journal-cli
+    - name: Run tests 
+      run: cd journal/build && ctest --verbose
+    - name: Exit shell
+      run: exit
