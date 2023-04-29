@@ -1,6 +1,6 @@
 #include "../../include/app/menu.hpp"
 
-namespace app {
+namespace jcli::app {
     
     // Call operator overload for menu
     void Menu::operator()() {

@@ -1,6 +1,6 @@
 #include "test.hpp"
 
-namespace Test {
+namespace jcli::test {
 
     /* ---- Test functions wrapper which returns a vector of pointers to tests to be run in main ----- */
     vector<function<expected<string, error>()>>* tests() {
@@ -18,7 +18,7 @@ namespace Test {
 
     // Tests journal insert function
     expected<string, error> test_journal_insert() {
-        using namespace journal;
+        using namespace jcli::journal;
 
         printf("--Testing journal insert\n");
 
@@ -64,7 +64,7 @@ namespace Test {
         
         int result{0};
         
-        printf("--Testing journal fetch\n");
+        fmt::print("--Testing journal fetch\n");
         
         Journal j{"test"}; // Create new journal object
         
@@ -111,12 +111,12 @@ namespace Test {
 
     // Tests journal remove function
     expected<string, error> test_journal_remove() {
-        using namespace journal;
+        using namespace jcli::journal;
         using namespace matchit;
 
         int result{0};
 
-        printf("--Testing journal remove\n");
+        fmt::print("--Testing journal remove\n");
 
         Journal j{"test"}; // Create new journal object
 
@@ -172,10 +172,10 @@ namespace Test {
 
     // Tests journal sort function
     expected<string, error> test_journal_sort() {
-        using namespace journal;
+        using namespace jcli::journal;
         using namespace matchit;
         
-        printf("--Testing journal sort\n");
+        fmt::print("--Testing journal sort\n");
         
         int result{0};
         

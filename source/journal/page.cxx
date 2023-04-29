@@ -1,6 +1,6 @@
 #include "../../include/journal/page.hpp"
 
-namespace journal {
+namespace jcli::journal {
     // Static page function to start building new pages
     PageBuilder* Page::builder() {
         auto* page = new PageBuilder;
@@ -88,21 +88,21 @@ namespace journal {
             case DECEMBER: month = "Dec"; break;
         }
         // Print date
-        printf("\t\t%s %s %d %d: ", 
+        fmt::print("\t\t {:s} {:s} {:d} {:d}: ", 
                 weekday.c_str(), 
                 month.c_str(),
                 this->date().day().day,
                 this->date().year());
         // Print title
-        printf("%s\n\n", this->title().c_str());
+        fmt::print("{:s}\n\n", this->title());
         // Print body
-        printf("%s\n\n", this->body().c_str());
+        fmt::print("{:s}\n\n", this->body());
         // Print tags
-        printf("tags: ");
+        fmt::print("tags: ");
         for(const string& tag: *this->tags()) {
-            printf("[%s] ", tag.c_str());
+            fmt::print("[{:s}] ", tag);
         }
-        printf("\n");
+        fmt::print("\n");
     }
     
     bool Page::operator ==(const Page& rhs) const {

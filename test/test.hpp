@@ -4,12 +4,11 @@
 #include <expected>
 #include <matchit.h>
 //#include <range/v3/all.hpp>
-#include <fmt/format.h>
 
 #include "../include/app/menu.hpp"
 #include "../include/journal/journal.hpp"
 
-namespace Test {
+namespace jcli::test {
     using namespace std;
 
     using error = tuple<int, string>; // Error type alias

@@ -1,10 +1,12 @@
 #pragma once
 
-#include <string>
 #include <vector>
 #include <random>
+#include <string>
 
-namespace journal {
+#include "fmt/format.h"
+
+namespace jcli::journal {
     using namespace std;
 
     // Enum containing the months of the year

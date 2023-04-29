@@ -3,24 +3,48 @@
 
 #include "../include/app/menu.hpp"
 #include "../include/journal/journal.hpp"
+#include "../include/utility/utility.hpp"
 #include "../test/test.hpp"
+
+// Checks if response matches any of the args
+template<class T>
+bool check_input(T response, std::vector<T> &args) {
+    for(T arg: args) { // For each arg in args, check if arg == response
+        if(arg == response) return true;
+    }
+
+    return false;
+}   
+
+// Gets input from user, checks if input matches any of the args
+// args must be of the same type as response, and one arg is required
+template<class T, class... S>
+void get_input(T &response, T arg, S... args) {
+    std::vector<T> vec{arg, args...}; // Create vector from args
+    do { // Do while response is not in vec
+        std::cin >> response;
+
+        if(!check_input(response, vec)) {
+            fmt::print("Input not recognized, please try again\n> ");
+        }
+    } while(!check_input(response, vec));
+}
 
 int main(int argc, char* argv[]) {
     using namespace std;
-    using namespace app;
-    using namespace journal;
+    using namespace jcli;
     using namespace matchit;
 /* ---- Program testing -------------------------------------------------------------- */
 
     // If program started with --test argument, runs tests instead of program
     if(argc > 1 && !strcmp(argv[1], "--test")) {
-        auto tests = Test::tests(); // Returns a vector of test function pointers
+        auto tests = test::tests(); // Returns a vector of test function pointers
 
         unsigned test_count = tests->size(); // Count of tests to be run
         int passed_count{0}; // Count of tests which passed
         
         system("clear");
-        printf("Running %d Tests:\n", test_count);
+        fmt::print("Running {} Tests:\n", test_count);
         
         int return_val{0}; // return value for main
         for (auto &test : *tests) {
@@ -35,17 +59,17 @@ int main(int argc, char* argv[]) {
 
                     return_val = return_val | value; // Bitwise or the result and the value of the current test
 
-                    printf("%s, returned %d\n", message.c_str(), value); // Print out fail message
+                    fmt::print("{}, returned {}\n", message, value); // Print out fail message
                 },
                 // If test_result has a value, print out the value and increment passed_count
                 pattern | true = [&] {
-                    printf("%s returned %d\n", test_result.value().c_str(), 0); // Print out pass message
+                    fmt::print("{} returned {}\n", test_result.value(), 0); // Print out pass message
                     passed_count++;
                 }
             );
         }
         
-        printf("Tests complete: %d/%d Tests Passed\n", passed_count, test_count);
+        fmt::print("Tests complete: {}/{} Tests Passed\n", passed_count, test_count);
         return return_val; // Returns 0 if all tests passed, 
                        // otherwise returns bitwise or of all test return values
     }
@@ -54,46 +78,63 @@ int main(int argc, char* argv[]) {
 
     bool exit = false; // Bool to control main program loop
 
-    Menu create_journal = Menu::builder()
-        ->title("Create Journal\n")
+    // Create new menu, create_journal, and give it a title
+    app::Menu create_journal = app::Menu::builder()
+        ->title("\033[33mC\033[0mreate Journal\n")
         ->build();
 
-    Menu open_journal = Menu::builder()
-        ->title("Open Journal\n") 
+    // Create new menu, open_journal, and give it a title
+    app::Menu open_journal = app::Menu::builder()
+        ->title("\033[33mO\033[0mpen Journal\n") 
         ->build();
 
     // Display lambda for main menu
-    auto main_display = [&](Menu* menu) -> void {
+    auto main_display = [&](app::Menu* menu) -> void {
         system("clear"); // Clear terminal
-        printf("%s", menu->title().c_str()); // Print main menu title
+        fmt::print("{}", menu->title()); // Print main menu title
 
         // For each sub menu, print their title
-        menu->for_each([](const Menu& sub) -> void {
-                printf("%s", sub.title().c_str());
+        menu->for_each([](const app::Menu& sub) -> void {
+                fmt::print("{}", sub.title());
         });
-        printf("\n");        
+        fmt::print("\n");  
+
+        fmt::print("\033[33mE\033[0mxit\n");  
         
         // Call main menu input fn
         (*menu->fn("input"))(menu);
     };
 
-    auto input = []() {
+    // Input lambda for main menu
+    auto main_input = [&](app::Menu* menu) -> void {
+        fmt::print("Select a option\n> ");
 
-    };
-
-    auto main_input = [&](Menu* menu) -> void {
-        printf("Select a option\n> ");
-
-        string response;
-
-        cin >> response;
-
-        exit = true;
+        // Get user input
+        char response;
+        get_input(response, 
+            'c', 'o', 'e', 
+            'C', 'O', 'E'
+        );
+        // Match response 
+        match(response) (
+            // If response is "create", call create_journal display fn
+            pattern | 'c' = [&] {
+            
+            },
+            // If response is "open", call open_journal display fn
+            pattern | 'o' = [&] {
+            
+            },
+            // If response is "exit", set exit to true
+            pattern | 'e' = [&] {
+                exit = true;
+            }
+        );
     };
 
     // Create new menu, main_menu, and give it a title and the display lambda with the key "main".
     // "main" function is automatically called when object is called as a function ie: main_menu();
-    Menu main_menu = Menu::builder()
+    app::Menu main_menu = app::Menu::builder()
         ->title("\t\t\t -- Main Menu --\n")
         ->fn("main", main_display)
         ->fn("input", main_input)
