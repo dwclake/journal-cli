@@ -30,7 +30,7 @@ set(SOURCE_FILES  ${SOURCE_DIR}/app/menu.cxx
                   ${SOURCE_DIR}/journal/journal.cxx
                   ${SOURCE_DIR}/journal/page.cxx
                   ${SOURCE_DIR}/utility/utility.cxx
-                  ${SOURCE_DIR}/input/input.txx)
+                  ${SOURCE_DIR}/input/input.hpp)
 
 set(TEST_FILES ${TEST_DIR}/journal/journal_test.hpp
                ${TEST_DIR}/journal/journal_test.cxx)

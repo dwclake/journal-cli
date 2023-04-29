@@ -23,4 +23,4 @@ namespace jcli::input {
         T get_input(); // Gets user input
     };
 } // namespace jcli::input
-#include "../../source/input/input.txx"
+#include "../../source/input/input.hpp"
