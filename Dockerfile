@@ -62,7 +62,7 @@ USER shs
 # Copy the binary from the build stage
 COPY --chown=shs:shs --from=build \
     ./journal/bin/* \
-    ./app
+    ./app/
 
 # Set the entrypoint
 ENTRYPOINT [ "./app/journal-cli" ]
