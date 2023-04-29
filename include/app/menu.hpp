@@ -1,10 +1,10 @@
 #pragma once
 
 #include <functional>
-#include <string>
 #include <map>
+#include <string>
 
-namespace app {
+namespace jcli::app {
     using namespace std;
     
     struct MenuBuilder;

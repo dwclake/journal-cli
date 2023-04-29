@@ -1,12 +1,14 @@
 #pragma once
 
-#include <cstdio>
 #include <functional>
 #include <optional>
 #include <utility>
+
+#include "fmt/format.h"
+
 #include "page.hpp"
 
-namespace journal {
+namespace jcli::journal {
     using namespace std;
 
     // Enum for sort type

@@ -6,3 +6,4 @@
 /.cache/
 /vcpkg/
 /vcpkg_installed/
+/.vscode/

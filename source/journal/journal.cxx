@@ -1,6 +1,6 @@
 #include "../../include/journal/journal.hpp"
 
-namespace journal {
+namespace jcli::journal {
     
     // Journal insert function
     void Journal::insert(const Page& page) {
@@ -72,9 +72,9 @@ namespace journal {
     
     // Journal display function
     void Journal::display() {
-        printf("Journal entries:\n\n");
+        fmt::print("Journal entries:\n\n");
         if(this->_size == 0) {
-            printf("Nothing to display, no pages in journal.\n");
+            fmt::print("Nothing to display, no pages in journal.\n");
         }
         // Iterate through list and display each page
         for(Page &page: this->_pages) {
