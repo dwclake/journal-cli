@@ -1,6 +1,8 @@
 #include <cstring>
 #include <iostream>
 
+#include <matchit.h>
+
 #include "../include/app/menu.hpp"
 #include "../include/journal/journal.hpp"
 #include "../include/utility/utility.hpp"

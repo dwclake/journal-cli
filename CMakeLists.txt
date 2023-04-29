@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 3.25.1)
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
       CACHE STRING "Vcpkg toolchain file")
 
-  project(journal-cli LANGUAGES CXX)
+project(journal-cli LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED)
+    set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(fmt CONFIG REQUIRED)
 find_package(range-v3 CONFIG REQUIRED)
@@ -30,8 +30,8 @@ set(SOURCE_FILES  ${SOURCE_DIR}/app/menu.cxx
                   ${SOURCE_DIR}/journal/page.cxx
                   ${SOURCE_DIR}/utility/utility.cxx)
 
-set(TEST_FILES ${TEST_DIR}/journal_test.hpp 
-               ${TEST_DIR}/journal_test.cxx)
+set(TEST_FILES ${TEST_DIR}/journal/journal_test.hpp
+               ${TEST_DIR}/journal/journal_test.cxx)
 
 add_executable(journal-cli ${SOURCE_DIR}/main.cxx ${INCLUDE_FILES} 
                            ${SOURCE_FILES})
