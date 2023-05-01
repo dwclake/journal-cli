@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
         });
         // Get user input by calling input object
         char response = input();
-        response = tolower(response); // Set reponse to lowercase
+        response = tolower(response); // Set response to lowercase
 
         // Match response 
         match(response) (
@@ -72,8 +72,21 @@ int main(int argc, char* argv[]) {
         );
     };
 
-    // Create new menu, main_menu, and give it a title and the display lambda with the key "main".
-    // "main" function is automatically called when object is called as a function ie: main_menu();
+    // Create new menu, main_menu, and give it a title and the display function with the key "main", and a input function.
+    // "main" function is the default function called when the menu object is called.
+    // Could also be build like this:
+    //
+    // app::Menu main_menu{
+    //    "\t\t\t -- Main Menu --\n",
+    //    {
+    //        {"main", main_display},
+    //        {"input", main_input}
+    //    },
+    //    {
+    //        {"create", create_journal},
+    //        {"open", open_journal}
+    //    }
+    // };
     app::Menu main_menu = app::Menu::builder()
         ->title("\t\t\t -- Main Menu --\n")
         ->fn("main", main_display)
@@ -82,7 +95,7 @@ int main(int argc, char* argv[]) {
         ->sub_menu("open", open_journal)
         ->build(); 
     
-    while(!exit) main_menu(); // Run main menu until exit is set true
+    while(!exit) main_menu("main"); // Run main menu until exit is set true
     
     return 0;
 }

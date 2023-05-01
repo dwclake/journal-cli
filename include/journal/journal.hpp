@@ -4,6 +4,7 @@
 #include <optional>
 #include <utility>
 
+#define FMT_HEADER_ONLY
 #include "fmt/format.h"
 
 #include "page.hpp"
@@ -27,6 +28,8 @@ namespace jcli::journal {
     struct Journal {
         Journal() = default; // Default constructor
         explicit Journal(string name): _name(std::move(name)) {} // Constructor taking the name of journal
+        // Constructor taking the name of the journal and a vector of pages
+        Journal(const string &name, const vector<Page> &pages): _name(name), _pages(pages) { _size = _pages.size(); }
         ~Journal() = default; // Destructor
 
         void display(); // Prints out every page in order

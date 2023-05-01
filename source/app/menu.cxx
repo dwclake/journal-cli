@@ -1,12 +1,20 @@
 #include "../../include/app/menu.hpp"
 
 namespace jcli::app {
-    
-    // Call operator overload for menu
-    void Menu::operator()() {
-        this->_fns["main"](this);
-    }     
-    
+
+    // Overloaded operator() to run the menu
+    // If no function name is specified, run the main function
+    void Menu::operator()(const string& fn) {
+        // If menu has no functions, return
+        if(this->_fns.size() == 0) return;
+        // If menu has one function, call it
+        if(this->_fns.size() == 1) {
+            this->_fns.begin()->second(this);
+        }
+        // If menu has more than one sub menu, call the one specified by name
+        this->_fns[fn](this);
+    }
+
     // Static menu function to start building new menus
     MenuBuilder* Menu::builder() {
         return new MenuBuilder;

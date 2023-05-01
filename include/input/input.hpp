@@ -4,6 +4,7 @@
 #include <vector>
 
 #include <matchit.h>
+#define FMT_HEADER_ONLY
 #include <fmt/format.h>
 
 namespace jcli::input {
@@ -23,4 +24,4 @@ namespace jcli::input {
         T get_input(); // Gets user input
     };
 } // namespace jcli::input
-#include "../../source/input/input.txx"
+#include "../../source/input/input.hpp"
