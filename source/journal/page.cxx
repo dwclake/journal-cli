@@ -1,6 +1,17 @@
 #include "../../include/journal/page.hpp"
 
 namespace jcli::journal {
+    
+    Page::Page(const string &title, const string &body, const Date &date, const vector<string> &tags)
+        : _title(title), _body(body), _date(date), _tags(tags) 
+    {
+            random_device rd;
+            mt19937 generator(rd());
+            uniform_int_distribution<int> distribution;
+
+            this->_key = distribution(generator);
+    }
+
     // Static page function to start building new pages
     PageBuilder* Page::builder() {
         auto* page = new PageBuilder;

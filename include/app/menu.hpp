@@ -12,8 +12,11 @@ namespace jcli::app {
     struct Menu {
         Menu() = default; // Default constructor
         explicit Menu(MenuBuilder*); // Constructor taking a MenuBuilder
+        // Constructor taking a title, a map of functions, and a map of sub menus
+        Menu(const string &s, const map<string, function<void(Menu*)>> &fns, const map<string, Menu> &menus) 
+            : _title(s), _fns{fns}, _sub_menus{menus} {}
 
-        void operator() (); // Overloaded operator() to run the menu
+        void operator() (const string& fn = "main"); // Overloaded operator() to run the menu
 
         static MenuBuilder* builder(); // Returns a new MenuBuilder*, used to build a Menu
         string title() const { return this->_title; }

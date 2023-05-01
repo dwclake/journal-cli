@@ -66,6 +66,7 @@ namespace jcli::journal {
     struct Page {
         Page() = default; // Default constructor
         explicit Page(PageBuilder*); // Constructor taking a PageBuilder*
+        Page(const string &title, const string &body, const Date &date, const vector<string> &tags); // Constructor taking a title, a body, a date, and a vector of tags
 
         void display() const; // Displays the page
         int key() const { return this->_key; }
