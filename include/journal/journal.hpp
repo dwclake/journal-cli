@@ -4,6 +4,7 @@
 #include <optional>
 #include <utility>
 
+#define FMT_HEADER_ONLY
 #include "fmt/format.h"
 
 #include "page.hpp"

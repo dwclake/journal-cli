@@ -4,6 +4,7 @@
 #include <random>
 #include <string>
 
+#define FMT_HEADER_ONLY
 #include "fmt/format.h"
 
 namespace jcli::journal {
