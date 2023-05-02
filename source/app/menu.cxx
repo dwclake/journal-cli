@@ -4,15 +4,19 @@ namespace jcli::app {
 
     // Overloaded operator() to run the menu
     // If no function name is specified, run the main function
-    void Menu::operator()(const string& fn) {
+    void Menu::operator()(const optional<string>& fn_name) {
         // If menu has no functions, return
         if(this->_fns.size() == 0) return;
         // If menu has one function, call it
         if(this->_fns.size() == 1) {
             this->_fns.begin()->second(this);
         }
-        // If menu has more than one sub menu, call the one specified by name
-        this->_fns[fn](this);
+        // If menu has more than one sub menu, call the one specified by name or if no name specified call the main function
+        if(fn_name.has_value()) {
+            this->_fns[fn_name.value()](this);
+        } else {
+            this->_fns["main"](this);
+        }
     }
 
     // Static menu function to start building new menus
