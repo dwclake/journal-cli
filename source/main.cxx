@@ -36,7 +36,8 @@ int main(int argc, char* argv[]) {
     // "main" function is the default function called when the menu object is called.
     app::Menu main_menu = app::Menu::builder()
         ->title("\t\t\t -- Main Menu --\n")
-        ->fn("main", [&](app::Menu* menu) -> void { // Main menu display fn
+		// Main menu display fn
+        ->fn("main", [&](app::Menu* menu) -> void {
             system("clear"); // Clear terminal
             fmt::print("{}", menu->title()); // Print main menu title
 
@@ -51,7 +52,8 @@ int main(int argc, char* argv[]) {
             // Call main menu input fn
             (*menu->fn("input"))(menu);
         })
-        ->fn("input", [&](app::Menu* menu) -> void { // Main menu input fn
+		// Main menu input fm
+        ->fn("input", [&](app::Menu* menu) -> void {
             fmt::print("Select a option\n> ");
 
             // Create input hander object with a vector of chars user input must match
@@ -92,7 +94,7 @@ int main(int argc, char* argv[]) {
     //        {"open", open_journal}
     //    }
     // };
+
     while(!exit) main_menu("main"); // Run main menu until exit is set true
-    
     return 0;
 }
