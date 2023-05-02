@@ -3,6 +3,7 @@
 #include <functional>
 #include <map>
 #include <string>
+#include <optional>
 
 namespace jcli::app {
     using namespace std;
@@ -16,7 +17,7 @@ namespace jcli::app {
         Menu(const string &s, const map<string, function<void(Menu*)>> &fns, const map<string, Menu> &menus) 
             : _title(s), _fns{fns}, _sub_menus{menus} {}
 
-        void operator() (const string& fn = "main"); // Overloaded operator() to run the menu
+        void operator() (const optional<string>& fn_name); // Overloaded operator() to run the menu
 
         static MenuBuilder* builder(); // Returns a new MenuBuilder*, used to build a Menu
         string title() const { return this->_title; }
