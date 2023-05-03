@@ -42,13 +42,6 @@ int main(int argc, char* argv[]) {
 
         })
         ->build();
-    // Could also be build like this:
-    // 
-    // app::Menu open_journal{
-    //     "\033[33mO\033[0mpen Journal\n",
-    //     {},
-    //     {}
-    // };
 
     // Create new menu, main_menu, and give it a title and the display function with the key "main", and a input function.
     // "main" function is the default function called when the menu object is called.
