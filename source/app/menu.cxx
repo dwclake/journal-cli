@@ -41,25 +41,25 @@ namespace jcli::app {
     
     // Adds a function to the menu being built, can be called as many times as needed
     MenuBuilder* MenuBuilder::fn(const string& name, const function<void (Menu *)>& fn) {
-        this->_fns.insert({name, fn});
+        this->_fns.emplace(name, fn);
         return this;
     }
     
     // Adds a function to the menu being built, can be called as many times as needed
     MenuBuilder* MenuBuilder::fn(const string& name, function<void (Menu *)>&& fn) {
-        this->_fns.insert({name, std::move(fn)});
+        this->_fns.emplace(name, std::move(fn));
         return this;
     }
     
     // Adds a sub menu to the menu being built, can be called as many times as needed
     MenuBuilder* MenuBuilder::sub_menu(const string& name, const Menu &menu) {
-        this->_sub_menus.insert({name, menu});
+        this->_sub_menus.emplace(name, menu);
         return this;
     }
     
     // Adds a sub menu to the menu being built, can be called as many times as needed
     MenuBuilder* MenuBuilder::sub_menu(const string& name, Menu&& menu) {
-        this->_sub_menus.insert({name, std::move(menu)});
+        this->_sub_menus.emplace(name, std::move(menu));
         return this;
     }
     
