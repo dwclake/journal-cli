@@ -1,5 +1,7 @@
 #include <cstring>
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 #include <matchit.h>
 
@@ -17,12 +19,28 @@ int main(int argc, char* argv[]) {
 
     // Create new menu, create_journal, and give it a title
     app::Menu create_journal = app::Menu::builder()
-        ->title("\033[33mC\033[0mreate Journal\n")
+        ->title("Create Journal")
+        ->fn("main", [&](app::Menu* menu) {
+            fmt::print("\t\t\t -- {} --\n", menu->title());
+            this_thread::sleep_for(chrono::milliseconds(1000));
+            (*menu->fn("input"))(menu);
+        })
+        ->fn("input", [&](app::Menu* menu) {
+
+        })
         ->build();
 
     // Create new menu, open_journal, and give it a title
     app::Menu open_journal = app::Menu::builder()
-        ->title("\033[33mO\033[0mpen Journal\n") 
+        ->title("Open Journal") 
+        ->fn("main", [&](app::Menu* menu) {
+            fmt::print("\t\t\t -- {} --\n", menu->title());
+            this_thread::sleep_for(chrono::milliseconds(1000));
+            (*menu->fn("input"))(menu);
+        })
+        ->fn("input", [&](app::Menu* menu) {
+
+        })
         ->build();
     // Could also be build like this:
     // 
@@ -35,15 +53,17 @@ int main(int argc, char* argv[]) {
     // Create new menu, main_menu, and give it a title and the display function with the key "main", and a input function.
     // "main" function is the default function called when the menu object is called.
     app::Menu main_menu = app::Menu::builder()
-        ->title("\t\t\t -- Main Menu --\n")
+        ->title("Main Menu")
 		// Main menu display fn
         ->fn("main", [&](app::Menu* menu) -> void {
             system("clear"); // Clear terminal
-            fmt::print("{}", menu->title()); // Print main menu title
+            fmt::print("\t\t\t -- {} --\n", menu->title()); // Print main menu title
 
             // For each sub menu, print their title
             menu->for_each([](const app::Menu& sub) -> void {
-                fmt::print("{}", sub.title());
+                fmt::print("\033[33m{}\033[0m{}\n", 
+                            sub.title()[0], 
+                            sub.title().substr(1, sub.title().size()));
             });
             fmt::print("\n");  
 
@@ -68,10 +88,10 @@ int main(int argc, char* argv[]) {
             // Match response 
             match(response) (    
                 pattern | 'c' = [&] { // If response is "create", call create_journal display fn
-            
+                    (*menu->sub("create"))("main"); 
                 },
                 pattern | 'o' = [&] { // If response is "open", call open_journal display fn
-            
+                    (*menu->sub("open"))("main"); 
                 },
                 pattern | 'e' = [&] { // If response is "exit", set exit to true
                     exit = true;
