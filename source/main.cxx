@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
     app::Menu create_journal = app::Menu::builder()
         ->title("Create Journal")
         ->fn("main", [&](app::Menu* menu) {
+            system("clear");
             fmt::print("\t\t\t -- {} --\n", menu->title());
             this_thread::sleep_for(chrono::milliseconds(1000));
             (*menu->fn("input"))(menu);
@@ -34,6 +35,7 @@ int main(int argc, char* argv[]) {
     app::Menu open_journal = app::Menu::builder()
         ->title("Open Journal") 
         ->fn("main", [&](app::Menu* menu) {
+            system("clear");
             fmt::print("\t\t\t -- {} --\n", menu->title());
             this_thread::sleep_for(chrono::milliseconds(1000));
             (*menu->fn("input"))(menu);
