@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.25.1)
 
 set(CMAKE_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake"
     CACHE STRING "Vcpkg toolchain file")
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 project(journal-cli LANGUAGES CXX)
 
