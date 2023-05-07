@@ -96,19 +96,6 @@ int main(int argc, char* argv[]) {
         ->sub_menu("create", create_journal)
         ->sub_menu("open", open_journal)
         ->build();  
-    // Could also be build like this if you declared the lambda functions before hand as main_display and main_input:
-    //
-    // app::Menu main_menu{
-    //    "\t\t\t -- Main Menu --\n",
-    //    {
-    //        {"main", main_display},
-    //        {"input", main_input}
-    //    },
-    //    {
-    //        {"create", create_journal},
-    //        {"open", open_journal}
-    //    }
-    // };
 
     while(!exit) main_menu("main"); // Run main menu until exit is set true
     return 0;
