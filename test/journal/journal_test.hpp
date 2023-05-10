@@ -6,7 +6,6 @@
 #include <matchit.h>
 //#include <range/v3/all.hpp>
 
-#include "../../include/app/menu.hpp"
 #include "../../include/journal/journal.hpp"
 
 namespace jcli::journal::test {
