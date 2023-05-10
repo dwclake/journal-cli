@@ -5,10 +5,7 @@
 
 #include <matchit.h>
 
-#include "../include/app/menu.hpp"
-#include "../include/journal/journal.hpp"
-#include "../include/input/input.hpp"
-#include "../include/utility/utility.hpp"
+#include "../include/prelude.hpp"
 
 int main(int argc, char* argv[]) {
     using namespace std;
