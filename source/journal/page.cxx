@@ -1,6 +1,6 @@
 #include "../../include/journal/page.hpp"
 
-namespace jcli::journal {
+namespace ReView::journal {
     
     Page::Page(const string &title, const string &body, const Date &date, const vector<string> &tags)
         : _title(title), _body(body), _date(date), _tags(tags) 

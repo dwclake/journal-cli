@@ -1,5 +1,5 @@
 #pragma once
 
-namespace jcli::utility {
+namespace ReView::utility {
     using namespace std;
 }

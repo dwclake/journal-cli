@@ -1,4 +1,4 @@
 #include "../../include/utility/utility.hpp"
 
-namespace jcli::utility {
+namespace ReView::utility {
 }

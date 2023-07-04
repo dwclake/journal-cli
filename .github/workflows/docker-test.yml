@@ -14,6 +14,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
     - name: Build docker images
-      run: docker build -t journal-cli -f Dockerfile .
+      run: docker build -t review -f Dockerfile .
     - name: Test image
-      run: docker run --rm --entrypoint /app/journal-cli-test journal-cli --journal
+      run: docker run --rm --entrypoint /app/review-test review --journal

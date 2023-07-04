@@ -1,6 +1,6 @@
-# Journal CLI
+# ReView
 ! In the early stages, not yet functional.
-`journal-cli` is a command line interface for daily journaling.
+`ReView` is a command line interface for daily journaling.
 
 # For development
 Main Requirements to build the project without building the docker image:
@@ -9,8 +9,8 @@ Main Requirements to build the project without building the docker image:
 
 Setup project:
 ```bash
-$ git clone https://github.com/dwclake/journal-cli.git
-$ cd journal-cli
+$ git clone https://github.com/dwclake/review.git
+$ cd review
 $ git submodule init
 $ git submodule update
 $ ./vcpkg/bootstrap-vcpkg.sh
@@ -19,7 +19,7 @@ Build and run project:
 ```bash
 $ cmake -B build -S .
 $ cmake --build build
-$ ./build/journal-cli
+$ ./build/review
 ```
 # License
-`journal-cli` is distributed under the terms of both the MIT license and the Apache License (Version 2.0)
+`ReView` is distributed under the terms of both the MIT license and the Apache License (Version 2.0)

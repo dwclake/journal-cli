@@ -9,7 +9,7 @@
 
 int main(int argc, char* argv[]) {
     using namespace std;
-    using namespace jcli;
+    using namespace ReView;
     using namespace matchit;
 
     bool exit = false; // Bool to control main program loop

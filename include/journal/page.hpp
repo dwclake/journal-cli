@@ -7,7 +7,7 @@
 #define FMT_HEADER_ONLY
 #include "fmt/format.h"
 
-namespace jcli::journal {
+namespace ReView::journal {
     using namespace std;
 
     // Enum containing the months of the year
