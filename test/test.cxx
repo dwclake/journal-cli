@@ -44,5 +44,8 @@ int main(int argc, char* argv[]) {
         fmt::print("Journal Tests complete: {}/{} Tests Passed\n", passed_count, test_count);
         return return_val; // Returns 0 if all tests passed, 
                            // otherwise returns bitwise or of all test return values
+    } else {
+        system("clear");
+        fmt::print("No tests run. Test name argument required. ex: --testname\n");
     }
 }
