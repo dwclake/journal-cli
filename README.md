@@ -9,8 +9,8 @@ Main Requirements to build the project without building the docker image:
 
 Setup project:
 ```bash
-$ git clone https://github.com/dwclake/review.git
-$ cd review
+$ git clone https://github.com/dwclake/ReView.git
+$ cd ReView
 $ git submodule init
 $ git submodule update
 $ ./vcpkg/bootstrap-vcpkg.sh
