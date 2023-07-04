@@ -1,6 +1,6 @@
 #include "../../include/journal/journal.hpp"
 
-namespace jcli::journal {
+namespace ReView::journal {
     
     // Journal insert function
     void Journal::insert(const Page& page) {

@@ -19,7 +19,7 @@ RUN apk update && \
 RUN pip install cmake ninja
     
 # Set the working directory
-WORKDIR /journal
+WORKDIR /review
 
 # Copy the project files
 COPY .git/ ./.git/
@@ -38,11 +38,11 @@ RUN ./vcpkg/vcpkg install
 
 # Build the project with cmake and move the binary to the bin directory
 RUN cmake -DCMAKE_BUILD_TYPE=Release -B build -S . \
-    "-DCMAKE_TOOLCHAIN_FILE=/journal/vcpkg/scripts/buildsystems/vcpkg.cmake" && \
+    "-DCMAKE_TOOLCHAIN_FILE=/review/vcpkg/scripts/buildsystems/vcpkg.cmake" && \
     cmake --build build --parallel 8 && \
     mkdir bin && \
-    mv build/journal-cli bin/journal-cli && \
-    mv build/journal-cli-test bin/journal-cli-test
+    mv build/review bin/review && \
+    mv build/review-test bin/review-test
 
 # Start with a base alpine image
 FROM alpine:3.17.3 
@@ -58,8 +58,8 @@ USER shs
 
 # Copy the binary from the build stage
 COPY --chown=shs:shs --from=build \
-    ./journal/bin/* \
+    ./review/bin/* \
     ./app/
 
 # Set the entrypoint
-ENTRYPOINT [ "./app/journal-cli" ]
+ENTRYPOINT [ "./app/review" ]

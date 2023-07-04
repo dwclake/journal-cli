@@ -5,7 +5,7 @@
 int main(int argc, char* argv[]) {
     using namespace std;
     using namespace matchit;
-    using namespace jcli;
+    using namespace ReView;
 /* ---- Testing -------------------------------------------------------------- */
     
     // If program started with --journal argument, run journal test

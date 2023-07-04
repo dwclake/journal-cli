@@ -8,7 +8,7 @@
 
 #include "../../include/journal/journal.hpp"
 
-namespace jcli::journal::test {
+namespace ReView::journal::test {
     using namespace std;
 
     using error = tuple<int, string>; // Error type alias

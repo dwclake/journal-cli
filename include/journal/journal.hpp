@@ -9,7 +9,7 @@
 
 #include "page.hpp"
 
-namespace jcli::journal {
+namespace ReView::journal {
     using namespace std;
 
     // Enum for sort type

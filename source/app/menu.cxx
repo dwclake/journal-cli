@@ -1,6 +1,6 @@
 #include "../../include/app/menu.hpp"
 
-namespace jcli::app {
+namespace ReView::app {
 
     // Overloaded operator() to run the menu
     // If no function name is specified, run the main function

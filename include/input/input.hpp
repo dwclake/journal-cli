@@ -7,7 +7,7 @@
 #define FMT_HEADER_ONLY
 #include <fmt/format.h>
 
-namespace jcli::input {
+namespace ReView::input {
     using namespace std;
 
     // Struct for handling user input
@@ -23,5 +23,5 @@ namespace jcli::input {
         bool check_input(); // Checks if response is in args
         T get_input(); // Gets user input
     };
-} // namespace jcli::input
+} // namespace ReView::input
 #include "../../source/input/input.hpp"

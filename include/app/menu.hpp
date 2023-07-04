@@ -5,7 +5,7 @@
 #include <string>
 #include <optional>
 
-namespace jcli::app {
+namespace ReView::app {
     using namespace std;
     
     struct MenuBuilder;

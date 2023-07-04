@@ -1,4 +1,4 @@
-namespace jcli::input {
+namespace ReView::input {
     using namespace std;
 
     // Struct for handling user input
@@ -31,4 +31,4 @@ namespace jcli::input {
     T InputHandler<T>::operator() () {
         return this->get_input();
     }    
-} // namespace jcli::input
+} // namespace ReView::input
